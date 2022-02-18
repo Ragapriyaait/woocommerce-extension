@@ -90,7 +90,7 @@
 
 
 
-    Version: 1.7.36
+    Version: 1.7.37
 
 
 
@@ -35759,7 +35759,7 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
-add_action('upgrader_process_complete', function ($upgrader_object, $options) {
+add_action('upgrader_process_complete', function ($upgrader_object, $options) use ($api){
 
     $our_plugin = plugin_basename(__FILE__);
 
@@ -35779,16 +35779,245 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) {
     if (!$is_plugin_updated) {
         return;
     }
-     custom_logs('ccccccccccccccc');
+     
+    $api->setStreamTypes(array(
 
+        array(
+
+            'name' => 'viewed product',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'added product to cart',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order completed',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order canceled',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'cart emptied',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order refund full',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order refund partial',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'new cart',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'new order',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order cancelled',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order refund full',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'order refund partial',
+
+            'description' => ''
+
+        ),
+
+
+
+        array(
+
+            'name' => 'upsell purchased',
+
+            'description' => 'Upsell Purchased'
+
+        ),
+
+        array(
+
+            'name' => 'order payment declined',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'completed order',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription started',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription payment',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription renewal',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription reactivated',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription payment declined',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription payment cancelled',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription payment 1234567',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription expired',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'sub renewal failed',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'sub payment failed',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription on hold',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'cancelled order',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'subscription cancelled',
+
+            'description' => ''
+
+        ),
+
+        array(
+
+            'name' => 'Subscription Pending Cancellation',
+
+            'description' => ''
+
+        ),
+
+    ));
 
 }, 10, 2);
 
-function custom_logs($message) { 
-    if(is_array($message)) { 
-        $message = json_encode($message); 
-    } 
-    $file = fopen("../custom_log1233s.log","a"); 
-    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message); 
-    fclose($file); 
-}
+
