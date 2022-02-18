@@ -5126,7 +5126,7 @@ add_action(
                             'description' => '',
                         ],
                         [
-                            'name' => 'subscription test',
+                            'name' => 'subscription test234',
 
                             'description' => '',
                         ],
