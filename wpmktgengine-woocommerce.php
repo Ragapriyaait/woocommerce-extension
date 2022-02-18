@@ -90,7 +90,7 @@
 
 
 
-    Version: 1.7.35
+    Version: 1.7.36
 
 
 
@@ -35779,7 +35779,16 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) {
     if (!$is_plugin_updated) {
         return;
     }
-    // custom__logs('ccccccccccccccc');
+     custom_logs('ccccccccccccccc');
 
 
 }, 10, 2);
+
+function custom_logs($message) { 
+    if(is_array($message)) { 
+        $message = json_encode($message); 
+    } 
+    $file = fopen("../custom_log1233s.log","a"); 
+    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message); 
+    fclose($file); 
+}
