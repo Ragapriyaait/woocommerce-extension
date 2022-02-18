@@ -1,32 +1,57 @@
 <?php
+
 /*
-Plugin Name: WooCommerce - WPMktgEngine | Genoo Extension
-Description: Genoo, LLC
-Author:  Genoo, LLC
-Author URI: http://www.genoo.com/
-Author Email: info@genoo.com
-Version: 1.7.53
-License: GPLv2
-WC requires at least: 3.0.0
-WC tested up to: 5.2.3
+
+    Plugin Name: WooCommerce - WPMktgEngine | Genoo Extension
+
+    Description: Genoo, LLC
+
+    Author:  Genoo, LLC
+
+    Author URI: http://www.genoo.com/
+
+    Author Email: info@genoo.com
+
+    Version: 1.7.54
+
+    License: GPLv2
+
+    WC requires at least: 3.0.0
+
+    WC tested up to: 5.2.3
+
 */
 
 /*
-Copyright 2015  WPMKTENGINE, LLC  (web : http://www.genoo.com/)
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as
-published by the Free Software Foundation.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Copyright 2015  WPMKTENGINE, LLC  (web : http://www.genoo.com/)
+
+    This program is free software; you can redistribute it and/or modify
+
+    it under the terms of the GNU General Public License, version 2, as
+
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+
+    along with this program; if not, write to the Free Software
+
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 */
 
 /**
+
  * Definitions
+
  */
 
 if (!defined('WPMKTENGINE_ORDER_KEY')) {
@@ -48,7 +73,9 @@ define('WPMKTENGINE_ECOMMERCE_LOG', true);
 define('WPMKTENGINE_ECOMMERCE_LOG_FOLDER', __DIR__);
 
 /**
+
  * Give us the API
+
  */
 
 function wpme_on_wpme_api_set()
@@ -86,7 +113,9 @@ function wpme_on_wpme_api_set()
 }
 
 /**
+
  * On activation
+
  */
 
 register_activation_hook(__FILE__, function () {
@@ -423,16 +452,6 @@ register_activation_hook(__FILE__, function () {
 
                         'description' => '',
                     ],
-                    [
-                        'name' => 'subscription test',
-
-                        'description' => '',
-                    ],
-                    [
-                        'name' => 'subscription test1',
-
-                        'description' => '',
-                    ],
                 ]);
             } catch (\Exception $e) {
                 // Decide later Sub Renewal Failed
@@ -471,12 +490,10 @@ register_activation_hook(__FILE__, function () {
     }
 });
 
-include_once plugin_dir_path(__FILE__) . 'deploy/updater.php';
-
-wpme_woo_com_forms_updater_init(__FILE__);
-
 /**
+
  * Plugin loaded
+
  */
 
 add_action(
@@ -491,13 +508,17 @@ add_action(
         require_once 'libs/WPME/WooCommerce/Helper.php';
 
         /**
-         * If Woocommerce exits
-         */
+
+     * If Woocommerce exits
+
+     */
 
         if (class_exists('woocommerce') || class_exists('Woocommerce')) {
             /**
-             * Init redirect
-             */
+
+         * Init redirect
+
+         */
 
             add_action(
                 'admin_init',
@@ -552,8 +573,10 @@ add_action(
             );
 
             /**
-             * Add auto-import script
-             */
+
+         * Add auto-import script
+
+         */
 
             add_action(
                 'admin_head',
@@ -572,8 +595,10 @@ add_action(
             );
 
             /**
-             * Add extensions to the Extensions list
-             */
+
+         * Add extensions to the Extensions list
+
+         */
 
             add_filter(
                 'wpmktengine_tools_extensions_widget',
@@ -588,9 +613,12 @@ add_action(
             );
 
             /**
-             * Add settings page
-             *  - if not already in
-             */
+
+         * Add settings page
+
+         *  - if not already in
+
+         */
 
             add_filter(
                 'wpmktengine_settings_sections',
@@ -622,8 +650,10 @@ add_action(
             );
 
             /**
-             * Add fields to settings page
-             */
+
+         * Add fields to settings page
+
+         */
 
             add_filter(
                 'wpmktengine_settings_fields',
@@ -693,8 +723,10 @@ add_action(
             );
 
             /**
-             * WooFunnel Upsell plugin
-             */
+
+         * WooFunnel Upsell plugin
+
+         */
 
             add_action(
                 'wfocu_offer_accepted_and_processed',
@@ -975,8 +1007,10 @@ add_action(
             );
 
             /**
-             * Genoo Leads, recompile to add ecommerce
-             */
+
+         * Genoo Leads, recompile to add ecommerce
+
+         */
 
             add_filter(
                 'option_genooLeads',
@@ -1012,9 +1046,12 @@ add_action(
             );
 
             /**
-             * Viewed Product
-             * Viewed Lesson (name of Lesson - name of course)(works)
-             */
+
+         * Viewed Product
+
+         * Viewed Lesson (name of Lesson - name of course)(works)
+
+         */
 
             add_action(
                 'wp',
@@ -1049,10 +1086,14 @@ add_action(
             );
 
             /**
-             * Started Cart
-             * Updated Cart
-             * - WACT
-             */
+
+         * Started Cart
+
+         * Updated Cart
+
+         * - WACT
+
+         */
 
             //add_action('woocommerce_cart_updated', function(){
 
@@ -1171,10 +1212,14 @@ add_action(
             );
 
             /**
-             * New customer
-             * New lead
-             * - WCC
-             */
+
+         * New customer
+
+         * New lead
+
+         * - WCC
+
+         */
 
             add_action(
                 'woocommerce_created_customer',
@@ -1328,8 +1373,10 @@ add_action(
             );
 
             /**
-             * New order
-             */
+
+         * New order
+
+         */
 
             add_action(
                 'woocommerce_checkout_update_order_meta',
@@ -1893,8 +1940,10 @@ add_action(
             );
 
             /**
-             * Order furfilled
-             */
+
+         * Order furfilled
+
+         */
 
             add_action('woocommerce_payment_complete', function ($order_id) {
                 wpme_simple_log_2('WPC-1 Payment complete.');
@@ -2140,8 +2189,10 @@ add_action(
             });
 
             /**
-             * Order Failed
-             */
+
+         * Order Failed
+
+         */
 
             add_action(
                 'woocommerce_order_status_pending',
@@ -2222,8 +2273,10 @@ add_action(
             );
 
             /**
-             * Order Refunded
-             */
+
+         * Order Refunded
+
+         */
 
             add_action(
                 'woocommerce_order_status_refunded',
@@ -2317,9 +2370,12 @@ add_action(
             );
 
             /**
-             * New product
-             * Update product
-             */
+
+         * New product
+
+         * Update product
+
+         */
 
             add_action(
                 'save_post',
@@ -2400,8 +2456,10 @@ add_action(
             );
 
             /**
-             * Save Order
-             */
+
+         * Save Order
+
+         */
 
             add_action(
                 'save_post',
@@ -2443,8 +2501,10 @@ add_action(
             );
 
             /**
-             * Partial Refund
-             */
+
+         * Partial Refund
+
+         */
 
             add_action(
                 'woocommerce_order_partially_refunded',
@@ -2538,8 +2598,10 @@ add_action(
             );
 
             /**
-             * Order cancelled
-             */
+
+         * Order cancelled
+
+         */
 
             add_action(
                 'woocommerce_order_status_cancelled',
@@ -2680,8 +2742,10 @@ add_action(
             );
 
             /**
-             * Block duplicate ID
-             */
+
+         * Block duplicate ID
+
+         */
 
             add_filter(
                 'woocommerce_duplicate_product_exclude_meta',
@@ -2695,8 +2759,10 @@ add_action(
             );
 
             /**
-             * Add widgets to Tools Page
-             */
+
+         * Add widgets to Tools Page
+
+         */
 
             add_filter(
                 'wpmktengine_tools_widgets',
@@ -2730,8 +2796,10 @@ add_action(
             );
 
             /**
-             * Add JS
-             */
+
+         * Add JS
+
+         */
 
             add_action(
                 'admin_enqueue_scripts',
@@ -2749,8 +2817,10 @@ add_action(
             );
 
             /**
-             * Genoo Log
-             */
+
+         * Genoo Log
+
+         */
 
             add_action(
                 'admin_head',
@@ -2762,12 +2832,16 @@ add_action(
             );
 
             /**
-             * Add Ajax
-             */
+
+         * Add Ajax
+
+         */
 
             /**
-             * Start products import
-             */
+
+         * Start products import
+
+         */
 
             add_action(
                 'wp_ajax_wpme_import_products_count',
@@ -2800,8 +2874,10 @@ add_action(
             );
 
             /**
-             * Import of the products
-             */
+
+         * Import of the products
+
+         */
 
             add_action(
                 'wp_ajax_wpme_import_products',
@@ -2920,14 +2996,20 @@ add_action(
 );
 
 /**
+
  * Genoo / WPME deactivation function
+
  */
 
 if (!function_exists('genoo_wpme_deactivate_plugin')) {
     /**
+
      * @param $file
+
      * @param $message
+
      * @param string $recover
+
      */
 
     function genoo_wpme_deactivate_plugin($file, $message, $recover = '')
@@ -2962,12 +3044,16 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 }
 
 /**
+
  * Genoo / WPME json return data
+
  */
 
 if (!function_exists('genoo_wpme_on_return')) {
     /**
+
      * @param $data
+
      */
 
     function genoo_wpme_on_return($data)
@@ -2982,9 +3068,13 @@ if (!function_exists('genoo_wpme_on_return')) {
 
 if (!function_exists('wpme_get_customer_lead_type')) {
     /**
+
      * Get Customer Lead Type
+
      *
+
      * @return bool|int
+
      */
 
     function wpme_get_customer_lead_type()
@@ -3006,11 +3096,17 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 if (!function_exists('wpme_can_continue_cookie_email')) {
     /**
+
      * Can continue with lead cookie, and email?
+
      *
+
      * @param $api
+
      * @param $email
+
      * @return bool
+
      */
 
     function wpme_can_continue_cookie_email($api, $email)
@@ -3037,9 +3133,13 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 if (!function_exists('wpme_simple_log_2')) {
     /**
+
      * @param        $msg
+
      * @param string $filename
+
      * @param bool   $dir
+
      */
 
     function wpme_simple_log_2($msg, $filename = 'log.log', $dir = false)
@@ -3070,9 +3170,13 @@ if (!function_exists('wpme_simple_log_2')) {
 
 if (!function_exists('wpme_get_first_name_from_request')) {
     /**
+
      * Get First name from request
+
      *
+
      * @return null|string
+
      */
 
     function wpme_get_first_name_from_request()
@@ -3103,9 +3207,13 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 if (!function_exists('wpme_get_last_name_from_request')) {
     /**
+
      * Get Last name from request
+
      *
+
      * @return null|string
+
      */
 
     function wpme_get_last_name_from_request()
@@ -3186,7 +3294,9 @@ if (!function_exists('wpme_clear_sess')) {
 }
 
 /**
+
  * Activity Stream Helper
+
  */
 
 function wpme_fire_activity_stream(
@@ -3255,9 +3365,13 @@ function wpme_fire_activity_stream(
 }
 
 /**
+
  * This utility function has been created after some back
+
  * and forth feedback and helps to decide what the correct
+
  * activity stream type should be for each action, name etc.
+
  */
 
 function wpme_get_order_stream_decipher(
@@ -3266,7 +3380,9 @@ function wpme_get_order_stream_decipher(
     $givenOrderStatus = false
 ) {
     /**
+
      * Order Status Change - Regular Order
+
      */
 
     $getrenewal = get_post_meta($order->id, '_subscription_renewal', true);
@@ -3280,8 +3396,11 @@ function wpme_get_order_stream_decipher(
     $orderStatus = $givenOrderStatus ? $givenOrderStatus : $order->get_status();
 
     /**
+
      * 1. Go through normal status
+
      * payment declined(renewal failed and payment failed)
+
      */
 
     switch ($orderStatus) {
@@ -3342,8 +3461,10 @@ function wpme_get_order_stream_decipher(
 }
 
 /**
- * Returns original Genoo Order Id
- */
+
+     * Returns original Genoo Order Id
+
+     */
 
 function get_wpme_order_from_woo_order($order)
 {
@@ -3377,8 +3498,10 @@ function get_wpme_order_from_woo_order($order)
 }
 
 /**
- * Get Lead ID from order
- */
+
+     * Get Lead ID from order
+
+     */
 
 function get_wpme_order_lead_id($genoo_id)
 {
@@ -3729,8 +3852,10 @@ add_action(
 );
 
 /**
- * Order Completed
- */
+
+         * Order Completed
+
+         */
 
 add_action(
     'woocommerce_order_status_completed',
@@ -4760,413 +4885,43 @@ add_action(
     10,
     2
 );
-
 //update the hook for create new field in database addon table.
 
-add_action(
-    'upgrader_process_complete',
-    function ($upgrader_object, $options) {
-        global $WPME_API;
+add_action('upgrader_process_complete', 'lead_folder_field_creation', 10, 2);
 
-        $our_plugin = plugin_basename(__FILE__);
+function lead_folder_field_creation($upgrader_object, $options)
+{
+    global $wpdb;
 
-        $is_plugin_updated = false;
+    //get plugin file.
 
-        if (!$is_plugin_updated) {
-            return;
-        }
+    $our_plugin = plugin_basename(__FILE__);
 
-        //check plugin is active
-        if (isset($options['plugins']) && is_array($options['plugins'])) {
-            foreach ($options['plugins'] as $index => $plugin) {
-                if ($our_plugin === $plugin) {
-                    $is_plugin_updated = true;
-                    break;
-                }
+    $is_plugin_updated = false;
+
+    //check plugin is active
+
+    if (isset($options['plugins']) && is_array($options['plugins'])) {
+        foreach ($options['plugins'] as $index => $plugin) {
+            if ($our_plugin === $plugin) {
+                $is_plugin_updated = true;
+                break;
             }
         }
-        $repo = new \Genoo\RepositorySettings();
-
-        $api = new \Genoo\Api($repo);
-
-        $fileFolder = basename(dirname(__FILE__));
-
-        $file = basename(__FILE__);
-
-        $filePlugin = $fileFolder . DIRECTORY_SEPARATOR . $file;
-
-        // Activate?
-
-        $activate = false;
-
-        $isGenoo = false;
-
-        // Get api / repo
-
-        if (
-            class_exists('\WPME\ApiFactory') &&
-            class_exists('\WPME\RepositorySettingsFactory')
-        ) {
-            $activate = true;
-
-            $repo = new \WPME\RepositorySettingsFactory();
-
-            $api = new \WPME\ApiFactory($repo);
-
-            if (class_exists('\Genoo\Api')) {
-                $isGenoo = true;
-            }
-        } elseif (
-            class_exists('\Genoo\Api') &&
-            class_exists('\Genoo\RepositorySettings')
-        ) {
-            $activate = true;
-
-            $repo = new \Genoo\RepositorySettings();
-
-            $api = new \Genoo\Api($repo);
-
-            $isGenoo = true;
-        } elseif (
-            class_exists('\WPMKTENGINE\Api') &&
-            class_exists('\WPMKTENGINE\RepositorySettings')
-        ) {
-            $activate = true;
-
-            $repo = new \WPMKTENGINE\RepositorySettings();
-
-            $api = new \WPMKTENGINE\Api($repo);
-        }
-
-        // 1. First protectoin, no WPME or Genoo plugin
-
-        if ($activate == false) {
-            genoo_wpme_deactivate_plugin(
-                $filePlugin,
-                'This extension requires WPMktgEngine or Genoo plugin to work with.'
-            );
-        } else {
-            // Right on, let's run the tests etc.
-
-            // 2. Second test, can we activate this extension?
-
-            // Active
-
-            $active = get_option('wpmktengine_extension_ecommerce', null);
-
-            $activeLeadType = false;
-
-            if ($isGenoo === true) {
-                $active = true;
-            }
-
-            if (
-                $active === null ||
-                $active == false ||
-                $active == '' ||
-                is_string($active) ||
-                $active == true
-            ) {
-                // Oh oh, no value, lets add one
-
-                try {
-                    $ecoomerceActivate = $api->getPackageEcommerce();
-
-                    if ($ecoomerceActivate == true || $isGenoo) {
-                        // Might be older package
-
-                        $ch = curl_init();
-
-                        if (defined('GENOO_DOMAIN')) {
-                            curl_setopt(
-                                $ch,
-                                CURLOPT_URL,
-                                'https:' .
-                                    GENOO_DOMAIN .
-                                    '/api/rest/ecommerceenable/true'
-                            );
-                        } else {
-                            curl_setopt(
-                                $ch,
-                                CURLOPT_URL,
-                                'https:' .
-                                    WPMKTENGINE_DOMAIN .
-                                    '/api/rest/ecommerceenable/true'
-                            );
-                        }
-
-                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-                        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                            'X-API-KEY: ' . $api->key,
-                        ]);
-
-                        $resp = curl_exec($ch);
-
-                        if (!$resp) {
-                            $active = false;
-
-                            $error = curl_error($ch);
-
-                            $errorCode = curl_errno($ch);
-                        } else {
-                            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) == 202) {
-                                // Active whowa whoooaa
-
-                                $active = true;
-
-                                // now, get the lead_type_id
-
-                                $json = json_decode($resp);
-
-                                if (
-                                    is_object($json) &&
-                                    isset($json->lead_type_id)
-                                ) {
-                                    $activeLeadType = $json->lead_type_id;
-                                }
-                            }
-                        }
-
-                        curl_close($ch);
-                    }
-                } catch (\Exception $e) {
-                    $active = false;
-                }
-
-                // Save new value
-
-                update_option('wpmktengine_extension_ecommerce', $active, true);
-            }
-
-            // 3. Check if we can activate the plugin after all
-
-            if ($active == false) {
-                genoo_wpme_deactivate_plugin(
-                    $filePlugin,
-                    'This extension is not allowed as part of your package.'
-                );
-            } else {
-                // 4. After all we can activate, that's great, lets add those calls
-
-                try {
-                    $api->setStreamTypes([
-                        [
-                            'name' => 'viewed product',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'added product to cart',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order completed',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order canceled',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'cart emptied',
-
-                            'description' => '',
-                        ],
-                        [
-                            'name' => 'cart emptied1',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order refund full',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order refund partial',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'new cart',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'new order',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order cancelled',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order refund full',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'order refund partial',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'upsell purchased',
-
-                            'description' => 'Upsell Purchased',
-                        ],
-
-                        [
-                            'name' => 'order payment declined',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'completed order',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription started',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription payment',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription renewal',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription reactivated',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription payment declined',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription payment cancelled',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription expired',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'sub renewal failed',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'sub payment failed',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription on hold',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'cancelled order',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'subscription cancelled',
-
-                            'description' => '',
-                        ],
-
-                        [
-                            'name' => 'Subscription Pending Cancellation',
-
-                            'description' => '',
-                        ],
-                        [
-                            'name' => 'subscription test234',
-
-                            'description' => '',
-                        ],
-                    ]);
-                } catch (\Exception $e) {
-                    // Decide later Sub Renewal Failed
-                }
-
-                // Activate and save leadType, import products
-
-                if ($activeLeadType == false || is_null($activeLeadType)) {
-                    // Leadtype not provided, or NULL, they have to set up for them selfes
-
-                    // Create a NAG for setting up the field
-
-                    // Shouldnt happen
-                } else {
-                    // Set up lead type
-
-                    $option = get_option('WPME_ECOMMERCE', []);
-
-                    // Save option
-
-                    $option['genooLeadUsercustomer'] = $activeLeadType;
-
-                    update_option('WPME_ECOMMERCE', $option);
-                }
-
-                // Ok, let's see, do the products import, if it ran before, it won't run,
-
-                // if it didn't ran, it will import the products. To achieve this, we save a value
-
-                // that says we just activated this, and the init will check for it and run
-
-                // the code to import.
-
-                add_option('WPME_WOOCOMMERCE_JUST_ACTIVATED', true);
-            }
-        }
-    },
-    10,
-    2
-);
+    }
+
+    if (!$is_plugin_updated) {
+        return;
+    }
+    custom_logs('ssssssssss');
+}
+
+function custom_logs($message)
+{
+    if (is_array($message)) {
+        $message = json_encode($message);
+    }
+    $file = fopen('../custom_logs123.log', 'a');
+    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
+    fclose($file);
+}
