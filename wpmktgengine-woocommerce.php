@@ -88,7 +88,7 @@
 
 
 
-    Version: 1.7.38
+    Version: 1.7.39
 
 
 
@@ -5213,6 +5213,7 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 add_action('upgrader_process_complete', function ($upgrader_object, $options) use ($api)
 {
+    global $WPME_API;
 
     $our_plugin = plugin_basename(__FILE__);
 
@@ -5239,7 +5240,7 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) us
     try
     {
 
-        $api->setStreamTypes(array(
+        $WPME_API->setStreamTypes(array(
 
             array(
 
