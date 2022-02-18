@@ -5,7 +5,7 @@ Description: Genoo, LLC
 Author:  Genoo, LLC
 Author URI: http://www.genoo.com/
 Author Email: info@genoo.com
-Version: 1.7.41
+Version: 1.7.42
 License: GPLv2
 WC requires at least: 3.0.0
 WC tested up to: 5.2.3
@@ -4780,220 +4780,373 @@ add_action(
             return;
         }
 
-        try {
-            $api->setStreamTypes([
-                [
-                    'name' => 'viewed product',
+        $fileFolder = basename(dirname(__FILE__));
 
-                    'description' => '',
-                ],
+        $file = basename(__FILE__);
 
-                [
-                    'name' => 'added product to cart',
+        $filePlugin = $fileFolder . DIRECTORY_SEPARATOR . $file;
 
-                    'description' => '',
-                ],
+        // Activate?
 
-                [
-                    'name' => 'order completed',
+        $activate = false;
 
-                    'description' => '',
-                ],
+        $isGenoo = false;
 
-                [
-                    'name' => 'order canceled',
+        // Get api / repo
 
-                    'description' => '',
-                ],
+        if (
+            class_exists('\WPME\ApiFactory') &&
+            class_exists('\WPME\RepositorySettingsFactory')
+        ) {
+            $activate = true;
 
-                [
-                    'name' => 'cart emptied',
+            $repo = new \WPME\RepositorySettingsFactory();
 
-                    'description' => '',
-                ],
+            $api = new \WPME\ApiFactory($repo);
 
-                [
-                    'name' => 'order refund full',
+            if (class_exists('\Genoo\Api')) {
+                $isGenoo = true;
+            }
+        } elseif (
+            class_exists('\Genoo\Api') &&
+            class_exists('\Genoo\RepositorySettings')
+        ) {
+            $activate = true;
 
-                    'description' => '',
-                ],
+            $repo = new \Genoo\RepositorySettings();
 
-                [
-                    'name' => 'order refund partial',
+            $api = new \Genoo\Api($repo);
 
-                    'description' => '',
-                ],
+            $isGenoo = true;
+        } elseif (
+            class_exists('\WPMKTENGINE\Api') &&
+            class_exists('\WPMKTENGINE\RepositorySettings')
+        ) {
+            $activate = true;
 
-                [
-                    'name' => 'new cart',
+            $repo = new \WPMKTENGINE\RepositorySettings();
 
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'new order',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'order cancelled',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'order refund full',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'order refund partial',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'upsell purchased',
-
-                    'description' => 'Upsell Purchased',
-                ],
-
-                [
-                    'name' => 'order payment declined',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'completed order',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription started',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription payment',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription payment12',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription renewal',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription reactivated',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription payment declined',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription payment cancelled',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription expired',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'sub renewal failed',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'sub payment failed',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription on hold',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'cancelled order',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'subscription cancelled',
-
-                    'description' => '',
-                ],
-
-                [
-                    'name' => 'Subscription Pending Cancellation',
-
-                    'description' => '',
-                ],
-                [
-                    'name' => 'Subscription Type  Test',
-
-                    'description' => '',
-                ],
-            ]);
-        } catch (\Exception $e) {
-            // Decide later Sub Renewal Failed
+            $api = new \WPMKTENGINE\Api($repo);
         }
 
-        // Activate and save leadType, import products
+        // 1. First protectoin, no WPME or Genoo plugin
 
-        if ($activeLeadType == false || is_null($activeLeadType)) {
-            // Leadtype not provided, or NULL, they have to set up for them selfes
-
-            // Create a NAG for setting up the field
-
-            // Shouldnt happen
+        if ($activate == false) {
+            genoo_wpme_deactivate_plugin(
+                $filePlugin,
+                'This extension requires WPMktgEngine or Genoo plugin to work with.'
+            );
         } else {
-            // Set up lead type
+            // Right on, let's run the tests etc.
 
-            $option = get_option('WPME_ECOMMERCE', []);
+            // 2. Second test, can we activate this extension?
 
-            // Save option
+            // Active
 
-            $option['genooLeadUsercustomer'] = $activeLeadType;
+            $active = get_option('wpmktengine_extension_ecommerce', null);
 
-            update_option('WPME_ECOMMERCE', $option);
+            $activeLeadType = false;
+
+            if ($isGenoo === true) {
+                $active = true;
+            }
+
+            if (
+                $active === null ||
+                $active == false ||
+                $active == '' ||
+                is_string($active) ||
+                $active == true
+            ) {
+                // Oh oh, no value, lets add one
+
+                try {
+                    $ecoomerceActivate = $api->getPackageEcommerce();
+
+                    if ($ecoomerceActivate == true || $isGenoo) {
+                        // Might be older package
+
+                        $ch = curl_init();
+
+                        if (defined('GENOO_DOMAIN')) {
+                            curl_setopt(
+                                $ch,
+                                CURLOPT_URL,
+                                'https:' .
+                                    GENOO_DOMAIN .
+                                    '/api/rest/ecommerceenable/true'
+                            );
+                        } else {
+                            curl_setopt(
+                                $ch,
+                                CURLOPT_URL,
+                                'https:' .
+                                    WPMKTENGINE_DOMAIN .
+                                    '/api/rest/ecommerceenable/true'
+                            );
+                        }
+
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                            'X-API-KEY: ' . $api->key,
+                        ]);
+
+                        $resp = curl_exec($ch);
+
+                        if (!$resp) {
+                            $active = false;
+
+                            $error = curl_error($ch);
+
+                            $errorCode = curl_errno($ch);
+                        } else {
+                            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) == 202) {
+                                // Active whowa whoooaa
+
+                                $active = true;
+
+                                // now, get the lead_type_id
+
+                                $json = json_decode($resp);
+
+                                if (
+                                    is_object($json) &&
+                                    isset($json->lead_type_id)
+                                ) {
+                                    $activeLeadType = $json->lead_type_id;
+                                }
+                            }
+                        }
+
+                        curl_close($ch);
+                    }
+                } catch (\Exception $e) {
+                    $active = false;
+                }
+
+                // Save new value
+
+                update_option('wpmktengine_extension_ecommerce', $active, true);
+            }
+
+            // 3. Check if we can activate the plugin after all
+
+            if ($active == false) {
+                genoo_wpme_deactivate_plugin(
+                    $filePlugin,
+                    'This extension is not allowed as part of your package.'
+                );
+            } else {
+                // 4. After all we can activate, that's great, lets add those calls
+
+                try {
+                    $api->setStreamTypes([
+                        [
+                            'name' => 'viewed product',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'added product to cart',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order completed',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order canceled',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'cart emptied',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order refund full',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order refund partial',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'new cart',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'new order',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order cancelled',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order refund full',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'order refund partial',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'upsell purchased',
+
+                            'description' => 'Upsell Purchased',
+                        ],
+
+                        [
+                            'name' => 'order payment declined',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'completed order',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription started',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription payment',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription renewal',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription reactivated',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription payment declined',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription payment cancelled',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription expired',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'sub renewal failed',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'sub payment failed',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription on hold',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'cancelled order',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'subscription cancelled',
+
+                            'description' => '',
+                        ],
+
+                        [
+                            'name' => 'Subscription Pending Cancellation',
+
+                            'description' => '',
+                        ],
+                    ]);
+                } catch (\Exception $e) {
+                    // Decide later Sub Renewal Failed
+                }
+
+                // Activate and save leadType, import products
+
+                if ($activeLeadType == false || is_null($activeLeadType)) {
+                    // Leadtype not provided, or NULL, they have to set up for them selfes
+
+                    // Create a NAG for setting up the field
+
+                    // Shouldnt happen
+                } else {
+                    // Set up lead type
+
+                    $option = get_option('WPME_ECOMMERCE', []);
+
+                    // Save option
+
+                    $option['genooLeadUsercustomer'] = $activeLeadType;
+
+                    update_option('WPME_ECOMMERCE', $option);
+                }
+
+                // Ok, let's see, do the products import, if it ran before, it won't run,
+
+                // if it didn't ran, it will import the products. To achieve this, we save a value
+
+                // that says we just activated this, and the init will check for it and run
+
+                // the code to import.
+
+                add_option('WPME_WOOCOMMERCE_JUST_ACTIVATED', true);
+            }
         }
-
-        // Ok, let's see, do the products import, if it ran before, it won't run,
-
-        // if it didn't ran, it will import the products. To achieve this, we save a value
-
-        // that says we just activated this, and the init will check for it and run
-
-        // the code to import.
-
-        add_option('WPME_WOOCOMMERCE_JUST_ACTIVATED', true);
     },
     10,
     2
