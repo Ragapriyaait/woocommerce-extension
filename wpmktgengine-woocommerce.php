@@ -12,7 +12,7 @@
 
     Author Email: info@genoo.com
 
-    Version: 1.7.30
+    Version: 1.7.29
 
     License: GPLv2
 
@@ -584,7 +584,7 @@ register_activation_hook(__FILE__, function () {
 
 
 include_once (plugin_dir_path(__FILE__) . 'deploy/updater.php');
-wpme_woo_forms_updater_init(__FILE__);
+wpme_woo_com_forms_updater_init(__FILE__);
 /**
 
  * Plugin loaded
@@ -5002,4 +5002,256 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
         endif;
 
     }, 10, 2);
+
+    //update the hook for create new field in database addon table.     
+                
+    add_action( 'upgrader_process_complete', 'lead_folder_field_creation', 10, 2 );
+
+    function lead_folder_field_creation( $upgrader_object, $options ) {
+       
+        global $WPME_API;
+
+        $WPME_API->setStreamTypes(array(
+
+            array(
+
+                'name' => 'viewed product',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'added product to cart',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order completed',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order canceled',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'cart emptied',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order refund full',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order refund partial',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'new cart',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'new order',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order cancelled',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order refund full',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'order refund partial',
+
+                'description' => ''
+
+            ) ,
+
+          
+
+            array(
+
+                'name' => 'upsell purchased',
+
+                'description' => 'Upsell Purchased'
+
+            ) ,
+
+            array(
+
+                'name' => 'order payment declined',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'completed order',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription started',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription payment',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription renewal',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription reactivated',
+
+                'description' => ''
+
+             ),
+
+            array(
+
+                'name' => 'subscription payment declined',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription payment cancelled',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription payment 1234567',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription expired',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'sub renewal failed',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'sub payment failed',
+
+                'description' => ''
+
+            ) ,
+
+            array(
+
+                'name' => 'subscription on hold',
+
+                'description' => ''
+
+             ),
+
+             array(
+
+                'name' => 'cancelled order',
+
+                'description' => ''
+
+             ),
+
+             array(
+
+                'name' => 'subscription cancelled',
+
+                'description' => ''
+
+             ),
+
+             array(
+
+                'name' => 'Subscription Pending Cancellation',
+
+                'description' => ''
+
+             ),
+
+        ));
+
+
+          
+         
+     
+    }
 
