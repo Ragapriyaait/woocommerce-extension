@@ -12,7 +12,7 @@
 
     Author Email: info@genoo.com
 
-    Version: 1.7.29
+    Version: 1.7.31
 
     License: GPLv2
 
@@ -5005,13 +5005,12 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
     //update the hook for create new field in database addon table.     
                 
-    add_action( 'upgrader_process_complete', 'lead_folder_field_creation', 10, 2 );
-
-    function lead_folder_field_creation( $upgrader_object, $options ) {
+    
+    add_action('upgrader_process_complete', function ($upgrader_object, $options) use ($api) {
        
         global $WPME_API;
 
-        $WPME_API->setStreamTypes(array(
+        $api->setStreamTypes(array(
 
             array(
 
@@ -5248,10 +5247,5 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
              ),
 
         ));
-
-
-          
-         
-     
-    }
+    });
 
