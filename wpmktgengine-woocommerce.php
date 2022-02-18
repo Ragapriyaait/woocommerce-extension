@@ -1,10 +1,24 @@
 <?php
 
+
+
 /*
 
 
 
+
+
+
+
   Plugin Name: WooCommerce - WPMktgEngine | Genoo Extension
+
+
+
+
+
+
+
+
 
 
 
@@ -20,7 +34,23 @@
 
 
 
+
+
+
+
+
+
+
+
     Author:  Genoo, LLC
+
+
+
+
+
+
+
+
 
 
 
@@ -36,6 +66,14 @@
 
 
 
+
+
+
+
+
+
+
+
     Author Email: info@genoo.com
 
 
@@ -44,7 +82,23 @@
 
 
 
-    Version: 1.7.34
+
+
+
+
+
+
+
+
+    Version: 1.7.35
+
+
+
+
+
+
+
+
 
 
 
@@ -60,7 +114,23 @@
 
 
 
+
+
+
+
+
+
+
+
     WC requires at least: 3.0.0
+
+
+
+
+
+
+
+
 
 
 
@@ -76,7 +146,23 @@
 
 
 
+
+
+
+
+
+
+
+
 */
+
+
+
+
+
+
+
+
 
 
 
@@ -92,7 +178,23 @@
 
 
 
+
+
+
+
+
+
+
+
     Copyright 2015  WPMKTENGINE, LLC  (web : http://www.genoo.com/)
+
+
+
+
+
+
+
+
 
 
 
@@ -108,7 +210,23 @@
 
 
 
+
+
+
+
+
+
+
+
     it under the terms of the GNU General Public License, version 2, as
+
+
+
+
+
+
+
+
 
 
 
@@ -124,7 +242,23 @@
 
 
 
+
+
+
+
+
+
+
+
     This program is distributed in the hope that it will be useful,
+
+
+
+
+
+
+
+
 
 
 
@@ -140,7 +274,23 @@
 
 
 
+
+
+
+
+
+
+
+
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
+
+
+
+
+
+
+
 
 
 
@@ -156,7 +306,23 @@
 
 
 
+
+
+
+
+
+
+
+
     You should have received a copy of the GNU General Public License
+
+
+
+
+
+
+
+
 
 
 
@@ -172,6 +338,14 @@
 
 
 
+
+
+
+
+
+
+
+
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
@@ -180,7 +354,31 @@
 
 
 
+
+
+
+
+
+
+
+
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -204,6 +402,14 @@
 
 
 
+
+
+
+
+
+
+
+
  * Definitions
 
 
@@ -212,7 +418,31 @@
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -236,9 +466,24 @@ if (!defined('WPMKTENGINE_ORDER_KEY')) {
 
 
 
-    define('WPMKTENGINE_ORDER_KEY', 'wpme_order_id');
 
+
+
+
+
+
+
+
+    define('WPMKTENGINE_ORDER_KEY', 'wpme_order_id');
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -254,9 +499,24 @@ if (!defined('WPMKTENGINE_PRODUCT_KEY')) {
 
 
 
-    define('WPMKTENGINE_PRODUCT_KEY', 'wpme_product_id');
 
+
+
+
+
+
+
+
+    define('WPMKTENGINE_PRODUCT_KEY', 'wpme_product_id');
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -272,7 +532,23 @@ define('WPMKTENGINE_ECOMMERCE_FOLDER', plugins_url(null, __FILE__));
 
 
 
+
+
+
+
+
+
+
+
 define('WPMKTENGINE_ECOMMERCE_REFRESH', md5('1.0-version'));
+
+
+
+
+
+
+
+
 
 
 
@@ -288,7 +564,23 @@ define('WPMKTENGINE_ECOMMERCE_REFRESH', md5('1.0-version'));
 
 
 
+
+
+
+
+
+
+
+
 define('WPMKTENGINE_ECOMMERCE_LOG', true);
+
+
+
+
+
+
+
+
 
 
 
@@ -312,7 +604,31 @@ define('WPMKTENGINE_ECOMMERCE_LOG_FOLDER', __DIR__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
+
+
+
+
+
+
+
+
 
 
 
@@ -328,7 +644,31 @@ define('WPMKTENGINE_ECOMMERCE_LOG_FOLDER', __DIR__);
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -352,7 +692,23 @@ function wpme_on_wpme_api_set()
 
 
 
+
+
+
+
+
+
+
+
 {
+
+
+
+
+
+
+
+
 
 
 
@@ -368,6 +724,14 @@ function wpme_on_wpme_api_set()
 
 
 
+
+
+
+
+
+
+
+
     if ($WPME_API) {
 
 
@@ -376,9 +740,24 @@ function wpme_on_wpme_api_set()
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -394,6 +773,14 @@ function wpme_on_wpme_api_set()
 
 
 
+
+
+
+
+
+
+
+
         $repo = new \WPME\RepositorySettingsFactory();
 
 
@@ -402,9 +789,24 @@ function wpme_on_wpme_api_set()
 
 
 
-        $api = new \WPME\ApiFactory($repo);
 
+
+
+
+
+
+
+
+        $api = new \WPME\ApiFactory($repo);
     } elseif (class_exists('\Genoo\Api') && class_exists('\Genoo\RepositorySettings')) {
+
+
+
+
+
+
+
+
 
 
 
@@ -420,9 +822,24 @@ function wpme_on_wpme_api_set()
 
 
 
-        $api = new \Genoo\Api($repo);
 
+
+
+
+
+
+
+
+        $api = new \Genoo\Api($repo);
     } elseif (class_exists('\WPMKTENGINE\Api') && class_exists('\WPMKTENGINE\RepositorySettings')) {
+
+
+
+
+
+
+
+
 
 
 
@@ -438,8 +855,15 @@ function wpme_on_wpme_api_set()
 
 
 
-        $api = new \WPMKTENGINE\Api($repo);
 
+
+
+
+
+
+
+
+        $api = new \WPMKTENGINE\Api($repo);
     }
 
 
@@ -448,9 +872,32 @@ function wpme_on_wpme_api_set()
 
 
 
-    $WPME_API = $api;
 
+
+
+
+
+
+
+
+    $WPME_API = $api;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -474,6 +921,14 @@ function wpme_on_wpme_api_set()
 
 
 
+
+
+
+
+
+
+
+
  * On activation
 
 
@@ -482,7 +937,31 @@ function wpme_on_wpme_api_set()
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -506,7 +985,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
     // Basic extension data
+
+
+
+
+
+
+
+
 
 
 
@@ -522,7 +1017,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
     $file = basename(__FILE__);
+
+
+
+
+
+
+
+
 
 
 
@@ -538,7 +1049,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
     // Activate?
+
+
+
+
+
+
+
+
 
 
 
@@ -554,7 +1081,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
     $isGenoo = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -570,6 +1113,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
     if (class_exists('\WPME\ApiFactory') && class_exists('\WPME\RepositorySettingsFactory')) {
 
 
@@ -578,7 +1129,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         $activate = true;
+
+
+
+
+
+
+
+
 
 
 
@@ -594,7 +1161,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         $api = new \WPME\ApiFactory($repo);
+
+
+
+
+
+
+
+
 
 
 
@@ -610,10 +1193,16 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             $isGenoo = true;
-
         }
-
     } elseif (class_exists('\Genoo\Api') && class_exists('\Genoo\RepositorySettings')) {
 
 
@@ -622,7 +1211,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         $activate = true;
+
+
+
+
+
+
+
+
 
 
 
@@ -638,6 +1243,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         $api = new \Genoo\Api($repo);
 
 
@@ -646,9 +1259,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-        $isGenoo = true;
 
+
+
+
+
+
+
+
+        $isGenoo = true;
     } elseif (class_exists('\WPMKTENGINE\Api') && class_exists('\WPMKTENGINE\RepositorySettings')) {
+
+
+
+
+
+
+
+
 
 
 
@@ -664,6 +1292,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         $repo = new \WPMKTENGINE\RepositorySettings();
 
 
@@ -672,9 +1308,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-        $api = new \WPMKTENGINE\Api($repo);
 
+
+
+
+
+
+
+
+        $api = new \WPMKTENGINE\Api($repo);
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -690,6 +1341,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
     if ($activate == false) {
 
 
@@ -698,9 +1357,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-        genoo_wpme_deactivate_plugin($filePlugin, 'This extension requires WPMktgEngine or Genoo plugin to work with.');
 
+
+
+
+
+
+
+
+        genoo_wpme_deactivate_plugin($filePlugin, 'This extension requires WPMktgEngine or Genoo plugin to work with.');
     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -716,7 +1390,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         // 2. Second test, can we activate this extension?
+
+
+
+
+
+
+
+
 
 
 
@@ -732,7 +1422,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         $active = get_option('wpmktengine_extension_ecommerce', null);
+
+
+
+
+
+
+
+
 
 
 
@@ -748,6 +1454,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         if ($isGenoo === true) {
 
 
@@ -756,9 +1470,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-            $active = true;
 
+
+
+
+
+
+
+
+            $active = true;
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -774,6 +1503,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             // Oh oh, no value, lets add one
 
 
@@ -782,7 +1519,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             try {
+
+
+
+
+
+
+
+
 
 
 
@@ -798,7 +1551,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                 if ($ecoomerceActivate == true || $isGenoo) {
+
+
+
+
+
+
+
+
 
 
 
@@ -814,7 +1583,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     $ch = curl_init();
+
+
+
+
+
+
+
+
 
 
 
@@ -830,8 +1615,15 @@ register_activation_hook(__FILE__, function () {
 
 
 
-                        curl_setopt($ch, CURLOPT_URL, 'https:' . GENOO_DOMAIN . '/api/rest/ecommerceenable/true');
 
+
+
+
+
+
+
+
+                        curl_setopt($ch, CURLOPT_URL, 'https:' . GENOO_DOMAIN . '/api/rest/ecommerceenable/true');
                     } else {
 
 
@@ -840,9 +1632,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-                        curl_setopt($ch, CURLOPT_URL, 'https:' . WPMKTENGINE_DOMAIN . '/api/rest/ecommerceenable/true');
 
+
+
+
+
+
+
+
+                        curl_setopt($ch, CURLOPT_URL, 'https:' . WPMKTENGINE_DOMAIN . '/api/rest/ecommerceenable/true');
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -858,7 +1665,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+
+
+
+
+
+
+
 
 
 
@@ -874,7 +1697,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         "X-API-KEY: " . $api->key
+
+
+
+
+
+
+
+
 
 
 
@@ -890,7 +1729,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     $resp = curl_exec($ch);
+
+
+
+
+
+
+
+
 
 
 
@@ -906,7 +1761,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         $active = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -922,9 +1793,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-                        $errorCode = curl_errno($ch);
 
+
+
+
+
+
+
+
+                        $errorCode = curl_errno($ch);
                     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -940,7 +1826,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                             // Active whowa whoooaa
+
+
+
+
+
+
+
+
 
 
 
@@ -956,7 +1858,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                             // now, get the lead_type_id
+
+
+
+
+
+
+
+
 
 
 
@@ -972,6 +1890,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                             if (is_object($json) && isset($json->lead_type_id)) {
 
 
@@ -980,12 +1906,17 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                                 $activeLeadType = $json->lead_type_id;
-
                             }
-
                         }
-
                     }
 
 
@@ -994,10 +1925,16 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     curl_close($ch);
-
                 }
-
             } catch (\Exception $e) {
 
 
@@ -1006,9 +1943,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-                $active = false;
 
+
+
+
+
+
+
+
+                $active = false;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1024,9 +1976,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-            update_option('wpmktengine_extension_ecommerce', $active, true);
 
+
+
+
+
+
+
+
+            update_option('wpmktengine_extension_ecommerce', $active, true);
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1042,6 +2009,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
         if ($active == false) {
 
 
@@ -1050,9 +2025,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-            genoo_wpme_deactivate_plugin($filePlugin, 'This extension is not allowed as part of your package.');
 
+
+
+
+
+
+
+
+            genoo_wpme_deactivate_plugin($filePlugin, 'This extension is not allowed as part of your package.');
         } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -1068,7 +2058,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             try {
+
+
+
+
+
+
+
+
 
 
 
@@ -1084,7 +2090,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1100,7 +2122,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1116,7 +2154,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1132,7 +2186,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1148,7 +2218,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1164,7 +2250,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1180,7 +2282,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1196,7 +2314,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1212,7 +2346,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1228,7 +2378,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1244,7 +2410,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1260,7 +2442,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1276,7 +2474,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1292,7 +2506,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1308,7 +2538,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1324,7 +2570,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1340,7 +2602,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1356,7 +2634,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1372,7 +2666,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1388,7 +2698,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1404,7 +2730,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1420,7 +2762,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1436,7 +2794,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1452,7 +2826,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1476,7 +2866,31 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1492,7 +2906,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => 'Upsell Purchased'
+
+
+
+
+
+
+
+
 
 
 
@@ -1508,7 +2938,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1524,7 +2970,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1540,7 +3002,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1556,7 +3034,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1572,7 +3066,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1588,7 +3098,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1604,7 +3130,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1620,7 +3162,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1636,7 +3194,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1652,7 +3226,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1668,7 +3258,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1684,7 +3290,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1700,7 +3322,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1716,7 +3354,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1732,7 +3386,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1748,7 +3418,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1764,7 +3450,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1780,7 +3482,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1796,7 +3514,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1812,7 +3546,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1828,7 +3578,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1844,7 +3610,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1860,7 +3642,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1876,7 +3674,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1892,7 +3706,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1908,7 +3738,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
+
+
+
+
+
+
+
+
 
 
 
@@ -1924,7 +3770,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     array(
+
+
+
+
+
+
+
+
 
 
 
@@ -1940,6 +3802,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'description' => ''
 
 
@@ -1948,7 +3818,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -1964,7 +3850,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                         'name' => 'Subscription Pending Cancellation',
+
+
+
+
+
+
+
+
 
 
 
@@ -1980,6 +3882,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                     ),
 
 
@@ -1988,9 +3898,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-                ));
 
+
+
+
+
+
+
+
+                ));
             } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2006,7 +3931,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -2022,7 +3963,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             if ($activeLeadType == false || is_null($activeLeadType)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2038,7 +3995,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                 // Create a NAG for setting up the field
+
+
+
+
+
+
+
+
 
 
 
@@ -2054,7 +4027,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -2070,7 +4059,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                 $option = get_option('WPME_ECOMMERCE', array());
+
+
+
+
+
+
+
+
 
 
 
@@ -2086,6 +4091,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
                 $option['genooLeadUsercustomer'] = $activeLeadType;
 
 
@@ -2094,9 +4107,24 @@ register_activation_hook(__FILE__, function () {
 
 
 
-                update_option('WPME_ECOMMERCE', $option);
 
+
+
+
+
+
+
+
+                update_option('WPME_ECOMMERCE', $option);
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -2112,7 +4140,23 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             // if it didn't ran, it will import the products. To achieve this, we save a value
+
+
+
+
+
+
+
+
 
 
 
@@ -2128,6 +4172,14 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             // the code to import.
 
 
@@ -2136,13 +4188,30 @@ register_activation_hook(__FILE__, function () {
 
 
 
+
+
+
+
+
+
+
+
             add_option('WPME_WOOCOMMERCE_JUST_ACTIVATED', true);
-
         }
-
     }
-
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2158,11 +4227,27 @@ include_once(plugin_dir_path(__FILE__) . 'deploy/updater.php');
 
 
 
+
+
+
+
 wpme_woo_com_forms_updater_init(__FILE__);
 
 
 
+
+
+
+
 /**
+
+
+
+
+
+
+
+
 
 
 
@@ -2178,7 +4263,31 @@ wpme_woo_com_forms_updater_init(__FILE__);
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2210,7 +4319,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Variant Cart
+
+
+
+
+
+
+
+
 
 
 
@@ -2226,7 +4359,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
     require_once 'libs/WPME/WooCommerce/VariantCart.php';
+
+
+
+
+
+
+
+
 
 
 
@@ -2250,7 +4399,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -2266,7 +4439,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2298,7 +4495,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -2314,7 +4535,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2338,7 +4583,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (get_option('WPME_WOOCOMMERCE_JUST_ACTIVATED', false)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2354,7 +4615,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if (!isset($_GET['activate-multi'])) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2370,7 +4647,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     if (class_exists('\Genoo\Api') && class_exists('\Genoo\RepositorySettings')) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2386,9 +4679,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            \WPMKTENGINE\Wordpress\Redirect::code(302)->to(admin_url('admin.php?page=GenooTools&run=WPME_WOOCOMMERCE_JUST_ACTIVATED'));
 
+
+
+
+
+
+
+
+                            \WPMKTENGINE\Wordpress\Redirect::code(302)->to(admin_url('admin.php?page=GenooTools&run=WPME_WOOCOMMERCE_JUST_ACTIVATED'));
                         } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -2404,6 +4712,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             \Genoo\Wordpress\Redirect::code(302)
 
 
@@ -2412,11 +4728,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 ->to(admin_url('admin.php?page=GenooTools&run=WPME_WOOCOMMERCE_JUST_ACTIVATED'));
-
                         }
-
                     } elseif (class_exists('\WPMKTENGINE\Api') && class_exists('\WPMKTENGINE\RepositorySettings')) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2432,15 +4762,35 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             ->to(admin_url('admin.php?page=WPMKTENGINETools&run=WPME_WOOCOMMERCE_JUST_ACTIVATED'));
-
                     }
-
                 }
-
             }
-
         }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2464,6 +4814,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Add auto-import script
 
 
@@ -2472,7 +4830,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2496,6 +4878,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (isset($_GET) && is_array($_GET) && array_key_exists('run', $_GET) && $_GET['run'] == 'WPME_WOOCOMMERCE_JUST_ACTIVATED') {
 
 
@@ -2504,11 +4894,33 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 echo '<script type="text/javascript">jQuery(function(){ jQuery(".postboxwoocommerceproductsimport .button").click(); });</script>';
-
             }
-
         }, 10, 100);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2532,6 +4944,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Add extensions to the Extensions list
 
 
@@ -2540,7 +4960,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2564,6 +5008,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $array['WooCommerce'] = '<span style="color:green">Active</span>';
 
 
@@ -2572,8 +5024,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            return $array;
 
+
+
+
+
+
+
+
+            return $array;
         }, 10, 1);
 
 
@@ -2590,7 +5049,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -2606,7 +5089,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          *  - if not already in
+
+
+
+
+
+
+
+
 
 
 
@@ -2622,7 +5121,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_filter('wpmktengine_settings_sections', function ($sections) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2638,7 +5153,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $isEcommerce = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -2654,7 +5185,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     if ($section['id'] == 'ECOMMERCE') {
+
+
+
+
+
+
+
+
 
 
 
@@ -2670,11 +5217,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         break;
-
                     }
-
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2690,7 +5251,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $sections[] = array(
+
+
+
+
+
+
+
+
 
 
 
@@ -2706,6 +5283,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         'title' => __('Ecommerce', 'wpmktengine')
 
 
@@ -2714,10 +5299,16 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     );
-
                 }
-
             }
 
 
@@ -2726,9 +5317,32 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            return $sections;
 
+
+
+
+
+
+
+
+            return $sections;
         }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2752,7 +5366,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Add fields to settings page
+
+
+
+
+
+
+
+
 
 
 
@@ -2768,7 +5398,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_filter('wpmktengine_settings_fields', function ($fields) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2784,7 +5430,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if (!empty($fields['genooLeads'])) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2800,7 +5462,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $rolesSave = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -2816,7 +5494,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         if ($role['type'] == 'select' && $role['name'] == 'genooLeadUsercustomer') {
+
+
+
+
+
+
+
+
 
 
 
@@ -2832,7 +5526,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $keyToRemove = $key;
+
+
+
+
+
+
+
+
 
 
 
@@ -2848,7 +5558,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Remove from array
+
+
+
+
+
+
+
+
 
 
 
@@ -2864,7 +5590,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Add field
+
+
+
+
+
+
+
+
 
 
 
@@ -2880,7 +5622,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $fields['WPME_ECOMMERCE'] = array(
+
+
+
+
+
+
+
+
 
 
 
@@ -2896,7 +5654,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             );
+
+
+
+
+
+
+
+
 
 
 
@@ -2912,11 +5686,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             break;
-
                         }
-
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -2932,7 +5720,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $fields['WPME_ECOMMERCE'] = array(
+
+
+
+
+
+
+
+
 
 
 
@@ -2948,7 +5752,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 'label' => 'Save customer lead as',
+
+
+
+
+
+
+
+
 
 
 
@@ -2964,7 +5784,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 'type' => 'select',
+
+
+
+
+
+
+
+
 
 
 
@@ -2980,6 +5816,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             )
 
 
@@ -2988,12 +5832,17 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         );
-
                     }
-
                 }
-
             }
 
 
@@ -3002,8 +5851,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            return $fields;
 
+
+
+
+
+
+
+
+            return $fields;
         }, 909, 1);
 
 
@@ -3020,7 +5876,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -3036,7 +5916,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -3052,7 +5948,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Get order ID
+
+
+
+
+
+
+
+
 
 
 
@@ -3068,7 +5980,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (!is_int($wpmeOrderId) && $wpmeOrderId < 1) {
+
+
+
+
+
+
+
+
 
 
 
@@ -3084,9 +6012,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                return;
 
+
+
+
+
+
+
+
+                return;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -3102,7 +6045,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             @$order = $get_parent_order;
+
+
+
+
+
+
+
+
 
 
 
@@ -3118,7 +6077,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $wpmeOrderItems = $order->get_items();
+
+
+
+
+
+
+
+
 
 
 
@@ -3134,7 +6109,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Prep array in place, let's iterate through that
+
+
+
+
+
+
+
+
 
 
 
@@ -3150,6 +6141,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Don't bother if this happens for some reason
 
 
@@ -3158,9 +6157,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                return;
 
+
+
+
+
+
+
+
+                return;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -3176,7 +6190,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // We're rolling, let's add those products to order again
+
+
+
+
+
+
+
+
 
 
 
@@ -3192,7 +6222,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 foreach ($get_package['products'] as $packageProduct) {
+
+
+
+
+
+
+
+
 
 
 
@@ -3208,7 +6254,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $packageProductName = $packageProductSingle->get_name();
+
+
+
+
+
+
+
+
 
 
 
@@ -3224,9 +6286,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    $api->putActivityByMail($wpmeLeadEmail, 'upsell purchased', $packageProductName, '', '');
 
+
+
+
+
+
+
+
+                    $api->putActivityByMail($wpmeLeadEmail, 'upsell purchased', $packageProductName, '', '');
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -3242,7 +6319,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 foreach ($wpmeOrderItems as $wpmeOrderItem) {
+
+
+
+
+
+
+
+
 
 
 
@@ -3258,7 +6351,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $changedItemData = $wpmeOrderItem->get_data();
+
+
+
+
+
+
+
+
 
 
 
@@ -3274,7 +6383,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $id = (int)get_post_meta($changedItemData['product_id'], WPMKTENGINE_PRODUCT_KEY, true);
+
+
+
+
+
+
+
+
 
 
 
@@ -3290,7 +6415,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $array['product_id'] = $id;
+
+
+
+
+
+
+
+
 
 
 
@@ -3306,7 +6447,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $array['total_price'] = $changedItemData['total'];
+
+
+
+
+
+
+
+
 
 
 
@@ -3322,7 +6479,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $array['external_product_id'] = $changedItemData['product_id'];
+
+
+
+
+
+
+
+
 
 
 
@@ -3338,11 +6511,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $wpmeApiOrderItems[] = $array;
-
                     }
-
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -3358,7 +6545,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder = new \WPME\Ecommerce\CartOrder($wpmeOrderId);
+
+
+
+
+
+
+
+
 
 
 
@@ -3374,7 +6577,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -3390,6 +6609,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->tax_amount = $order->get_total_tax();
 
 
@@ -3398,7 +6625,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -3414,7 +6657,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -3430,7 +6689,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     ->changed->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -3446,6 +6721,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_get_order_stream_decipher($order, $cartOrder);
 
 
@@ -3454,9 +6737,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                $cartOrder->updateOrder(true);
 
+
+
+
+
+
+
+
+                $cartOrder->updateOrder(true);
             } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -3472,9 +6770,32 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            }
 
+
+
+
+
+
+
+
+            }
         }, 10, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3498,7 +6819,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             wpme_simple_log_2('WOSF-1 Payment failed.');
+
+
+
+
+
+
+
+
 
 
 
@@ -3514,7 +6851,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -3530,7 +6883,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (function_exists('wcs_get_subscriptions_for_order')) :
+
+
+
+
+
+
+
+
 
 
 
@@ -3546,7 +6915,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'order_type' => 'any'
+
+
+
+
+
+
+
+
 
 
 
@@ -3562,7 +6947,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             endif;
+
+
+
+
+
+
+
+
 
 
 
@@ -3578,7 +6979,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $getrenewal = get_post_meta($order_id, '_subscription_renewal', true);
+
+
+
+
+
+
+
+
 
 
 
@@ -3594,7 +7011,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -3610,7 +7043,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -3626,7 +7075,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -3642,7 +7107,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -3666,6 +7147,22 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $cartOrder->financial_status = 'declined';
 
 
@@ -3674,7 +7171,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $subscription_product_name = get_wpme_subscription_activity_name($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -3698,7 +7211,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $genoo_lead_id = get_wpme_order_lead_id($id);
+
+
+
+
+
+
+
+
 
 
 
@@ -3722,6 +7259,22 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     $cartOrder->order_status = 'sub payment failed';
 
 
@@ -3730,7 +7283,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -3762,6 +7331,30 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     wpme_fire_activity_stream(
 
 
@@ -3770,7 +7363,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $genoo_lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -3786,7 +7395,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $subscription_product_name_values, // Title  $order->parent_id
+
+
+
+
+
+
+
+
 
 
 
@@ -3802,7 +7427,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         ' '
+
+
+
+
+
+
+
+
 
 
 
@@ -3818,7 +7459,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -3834,6 +7491,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->order_status = 'sub renewal failed';
 
 
@@ -3842,7 +7507,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -3858,6 +7539,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_fire_activity_stream(
 
 
@@ -3866,7 +7555,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $genoo_lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -3882,7 +7587,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $subscription_product_name_values, // Title  $order->parent_id
+
+
+
+
+
+
+
+
 
 
 
@@ -3898,7 +7619,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         ' '
+
+
+
+
+
+
+
+
 
 
 
@@ -3914,7 +7651,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -3930,7 +7683,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->order_status = 'payment failed';
+
+
+
+
+
+
+
+
 
 
 
@@ -3946,7 +7715,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         ->changed->order_status = 'payment failed';
+
+
+
+
+
+
+
+
 
 
 
@@ -3962,7 +7747,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $genoo_lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -3978,7 +7779,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $subscription_product_name_values, // Title  $order->parent_id
+
+
+
+
+
+
+
+
 
 
 
@@ -3994,7 +7811,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         ' '
+
+
+
+
+
+
+
+
 
 
 
@@ -4010,7 +7843,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -4034,7 +7883,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -4050,7 +7923,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if ($cartOrderEmail !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4066,6 +7955,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder
 
 
@@ -4074,9 +7971,32 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        ->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                        ->changed->email_ordered_from = $cartOrderEmail;
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4100,7 +8020,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WOSF-3A-2 Finished updating order.');
+
+
+
+
+
+
+
+
 
 
 
@@ -4116,7 +8052,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2($WPME_API
+
+
+
+
+
+
+
+
 
 
 
@@ -4132,8 +8084,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    ->response['body']);
 
+
+
+
+
+
+
+
+                    ->response['body']);
             }
 
 
@@ -4142,7 +8101,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Failed!
+
+
+
+
+
+
+
+
 
 
 
@@ -4166,7 +8141,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -4182,7 +8181,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -4198,6 +8213,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (!is_array($array)) {
 
 
@@ -4206,9 +8229,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                $array = array();
 
+
+
+
+
+
+
+
+                $array = array();
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -4224,7 +8262,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $leadType = 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -4240,7 +8294,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $leadTypeSaved = get_option('WPME_ECOMMERCE');
+
+
+
+
+
+
+
+
 
 
 
@@ -4256,9 +8326,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                $leadType = $leadTypeSaved['genooLeadUsercustomer'];
 
+
+
+
+
+
+
+
+                $leadType = $leadTypeSaved['genooLeadUsercustomer'];
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -4274,8 +8359,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            return $array;
 
+
+
+
+
+
+
+
+            return $array;
         }, 10, 1);
 
 
@@ -4292,7 +8384,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -4308,7 +8424,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Viewed Lesson (name of Lesson - name of course)(works)
+
+
+
+
+
+
+
+
 
 
 
@@ -4324,7 +8456,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('wp', function () use ($api) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4340,7 +8488,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $user = wp_get_current_user();
+
+
+
+
+
+
+
+
 
 
 
@@ -4356,7 +8520,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Course
+
+
+
+
+
+
+
+
 
 
 
@@ -4372,6 +8552,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('Viewed product by email: ' . $user->user_email);
 
 
@@ -4380,10 +8568,16 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $api->putActivityByMail($user->user_email, 'viewed product', '' . $post->post_title . '', '', get_permalink($post->ID));
-
             }
-
         }, 10);
 
 
@@ -4400,7 +8594,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -4416,7 +8634,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Updated Cart
+
+
+
+
+
+
+
+
 
 
 
@@ -4432,7 +8666,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -4448,7 +8698,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('woocommerce_after_calculate_totals', function () {
+
+
+
+
+
+
+
+
 
 
 
@@ -4464,7 +8730,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -4480,7 +8762,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             wpme_simple_log_2('WACT-1 Updated cart start:');
+
+
+
+
+
+
+
+
 
 
 
@@ -4496,7 +8794,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WACT-1-1 Has API and lead cookie: ' . (int)\WPME\Helper::loggedInOrCookie());
+
+
+
+
+
+
+
+
 
 
 
@@ -4512,7 +8826,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cart = WC()->cart;
+
+
+
+
+
+
+
+
 
 
 
@@ -4528,7 +8858,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -4544,6 +8890,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartContents = \WPME\WooCommerce\VariantCart::convertCartToObject($cart->cart_contents);
 
 
@@ -4552,7 +8906,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartTotal = \WPME\WooCommerce\VariantCart::convertTotalFromContents($cartContents);
+
+
+
+
+
+
+
+
 
 
 
@@ -4576,7 +8946,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WACT-1-2 Updating cart. User: ' . (int)\WPME\Helper::loggedInOrCookie());
+
+
+
+
+
+
+
+
 
 
 
@@ -4592,7 +8986,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if (isset($session->{WPMKTENGINE_ORDER_KEY})) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4608,7 +9018,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WACT-1-2A-1 Updating existing cart for User: ' . (int)\WPME\Helper::loggedInOrCookie());
+
+
+
+
+
+
+
+
 
 
 
@@ -4624,7 +9050,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // 21.03.2016 - Kim
+
+
+
+
+
+
+
+
 
 
 
@@ -4640,7 +9082,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->addItemsArray($cartContents);
+
+
+
+
+
+
+
+
 
 
 
@@ -4656,7 +9114,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $updated = $cartOrder->updateOrder();
+
+
+
+
+
+
+
+
 
 
 
@@ -4672,7 +9146,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WACT-1-2A-3 Updated response: ' . var_export($updated, true));
+
+
+
+
+
+
+
+
 
 
 
@@ -4688,6 +9178,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Updated
 
 
@@ -4696,11 +9194,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         }
-
                     }
-
                 } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -4716,7 +9228,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     // New cart creation on WPME
+
+
+
+
+
+
+
+
 
 
 
@@ -4732,7 +9260,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->setTotal($cartTotalFinal);
+
+
+
+
+
+
+
+
 
 
 
@@ -4748,7 +9292,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     // After setting a cart we get an order ID
+
+
+
+
+
+
+
+
 
 
 
@@ -4764,6 +9324,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $session->set(WPMKTENGINE_ORDER_KEY, $cartOrder->id);
 
 
@@ -4772,12 +9340,17 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WACT-1-2B-2 Started cart : ' . $cartOrder->id);
-
                 }
-
             }
-
         }, 100, 1);
 
 
@@ -4794,7 +9367,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -4810,7 +9407,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * New lead
+
+
+
+
+
+
+
+
 
 
 
@@ -4826,7 +9439,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -4842,7 +9471,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Check if lead eixsts, if not create a lead, add lead_id
+
+
+
+
+
+
+
+
 
 
 
@@ -4858,7 +9503,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $email = $new_customer_data['user_email'];
+
+
+
+
+
+
+
+
 
 
 
@@ -4874,7 +9535,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -4890,7 +9567,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             wpme_simple_log_2('WCC-2 Creating customer info: ' . print_r($new_customer_data, true));
+
+
+
+
+
+
+
+
 
 
 
@@ -4906,7 +9599,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 try {
+
+
+
+
+
+
+
+
 
 
 
@@ -4922,7 +9631,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     // NO lead, create one
+
+
+
+
+
+
+
+
 
 
 
@@ -4938,7 +9663,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     //$leadType = $WPME_API->settingsRepo->getLeadTypeSubscriber();
+
+
+
+
+
+
+
+
 
 
 
@@ -4954,9 +9695,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        $leadType = $leadTypeFirst;
 
+
+
+
+
+
+
+
+                        $leadType = $leadTypeFirst;
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -4972,7 +9728,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $lead_first = wpme_get_first_name_from_request();
+
+
+
+
+
+
+
+
 
 
 
@@ -4988,7 +9760,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCC-2B-2 Getting First and Last name: ' . @$lead_first . ' ' . @$lead_last);
+
+
+
+
+
+
+
+
 
 
 
@@ -5004,7 +9792,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $atts = apply_filters('genoo_wpme_lead_creation_attributes', array(), 'ecommerce-register-new-customer-lead');
+
+
+
+
+
+
+
+
 
 
 
@@ -5020,7 +9824,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_clear_sess();
+
+
+
+
+
+
+
+
 
 
 
@@ -5036,7 +9856,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCC-2B.4 Lead response: ' . $leadNew);
+
+
+
+
+
+
+
+
 
 
 
@@ -5052,7 +9888,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     if (!is_null($leadNew)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5068,7 +9920,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCC-2B-4A-2 Setting user meta & cookie.');
+
+
+
+
+
+
+
+
 
 
 
@@ -5084,7 +9952,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $lead_id = $leadNew;
+
+
+
+
+
+
+
+
 
 
 
@@ -5100,7 +9984,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         \add_user_meta((int)$customer_id, WPMKTENGINE_LEAD_COOKIE, $lead_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -5116,7 +10016,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // Set cookie
+
+
+
+
+
+
+
+
 
 
 
@@ -5132,6 +10048,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCC-2B-4A-3 New customer lead email: ' . $email);
 
 
@@ -5140,9 +10064,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        wpme_simple_log_2('WCC-2B-4A-4 New customer lead ID: ' . $lead_id);
 
+
+
+
+
+
+
+
+                        wpme_simple_log_2('WCC-2B-4A-4 New customer lead ID: ' . $lead_id);
                     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -5158,7 +10097,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCC-2B-4B-2 Api response:');
+
+
+
+
+
+
+
+
 
 
 
@@ -5174,6 +10129,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             ->http
 
 
@@ -5182,10 +10145,16 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             ->response['body']);
-
                     }
-
                 } catch (\Exception $e) {
 
 
@@ -5194,12 +10163,17 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCC-2C-1 - Error while creating & getting a LEAD: ' . $e->getMessage());
-
                 }
-
             }
-
         }, 10, 3);
 
 
@@ -5216,7 +10190,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -5232,7 +10230,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -5248,7 +10262,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             wpme_simple_log_2('WCUOM-1 Updating order meta after checkout.');
+
+
+
+
+
+
+
+
 
 
 
@@ -5264,7 +10294,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -5280,7 +10326,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // It might actually never get here ...
+
+
+
+
+
+
+
+
 
 
 
@@ -5296,7 +10358,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WCUOM-2A-1 Order object exists (cart), getting ID.');
+
+
+
+
+
+
+
+
 
 
 
@@ -5312,7 +10390,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WCUOM-2A-2 Order found, Genoo order id: ' . $order_genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -5328,7 +10422,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -5344,7 +10454,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress2 = $order->get_address('shipping');
+
+
+
+
+
+
+
+
 
 
 
@@ -5360,7 +10486,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -5376,7 +10518,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -5392,7 +10550,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -5408,7 +10582,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -5424,7 +10614,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -5440,7 +10646,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     '',
+
+
+
+
+
+
+
+
 
 
 
@@ -5456,7 +10678,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 );
+
+
+
+
+
+
+
+
 
 
 
@@ -5472,7 +10710,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress2['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -5488,7 +10742,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress2['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -5504,7 +10774,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress2['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -5520,7 +10806,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     '',
+
+
+
+
+
+
+
+
 
 
 
@@ -5536,7 +10838,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 );
+
+
+
+
+
+
+
+
 
 
 
@@ -5552,7 +10870,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->currency = $order->get_order_currency();
+
+
+
+
+
+
+
+
 
 
 
@@ -5568,7 +10902,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Add email and leadType
+
+
+
+
+
+
+
+
 
 
 
@@ -5584,7 +10934,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 //email_ordered_from = email address making the sale
+
+
+
+
+
+
+
+
 
 
 
@@ -5600,7 +10966,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->ec_lead_type_id = wpme_get_customer_lead_type();
+
+
+
+
+
+
+
+
 
 
 
@@ -5616,7 +10998,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->email_ordered_from = $email;
+
+
+
+
+
+
+
+
 
 
 
@@ -5632,7 +11030,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->tax_amount = $order->get_total_tax();
+
+
+
+
+
+
+
+
 
 
 
@@ -5648,7 +11062,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -5664,7 +11094,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -5680,7 +11126,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if ($cartOrderEmail !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5696,9 +11158,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    $cartOrder->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                    $cartOrder->changed->email_ordered_from = $cartOrderEmail;
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -5714,7 +11191,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->updateOrder(true);
+
+
+
+
+
+
+
+
 
 
 
@@ -5730,7 +11223,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Order meta
+
+
+
+
+
+
+
+
 
 
 
@@ -5746,7 +11255,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 \update_post_meta($order_id, WPMKTENGINE_ORDER_KEY, $order_genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -5762,7 +11287,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WCUOM-2A-5 Finished ORDER from CART, Genoo ID:' . WC()->session->{WPMKTENGINE_ORDER_KEY});
+
+
+
+
+
+
+
+
 
 
 
@@ -5778,6 +11319,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Remove session
 
 
@@ -5786,9 +11335,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                unset(WC()->session->{WPMKTENGINE_ORDER_KEY});
 
+
+
+
+
+
+
+
+                unset(WC()->session->{WPMKTENGINE_ORDER_KEY});
             } elseif (isset($WPME_API)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5804,7 +11368,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // At this point, we need to start a cart, change it to new order, add everything.
+
+
+
+
+
+
+
+
 
 
 
@@ -5820,7 +11400,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // 1. Create a lead get if exists
+
+
+
+
+
+
+
+
 
 
 
@@ -5836,7 +11432,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $email = isset($_POST) && is_array($_POST) && array_key_exists('billing_email', $_POST) && !empty($_POST['billing_email']) && filter_var($_POST['billing_email'], FILTER_VALIDATE_EMAIL) !== false ? $_POST['billing_email'] : false;
+
+
+
+
+
+
+
+
 
 
 
@@ -5852,7 +11464,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if ($email !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5868,7 +11496,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     // Get order & adresses
+
+
+
+
+
+
+
+
 
 
 
@@ -5884,7 +11528,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     @$order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -5900,7 +11560,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartAddress2 = $order->get_address('shipping');
+
+
+
+
+
+
+
+
 
 
 
@@ -5916,7 +11592,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     @$lead_last = isset($data['billing_last_name']) ? $data['billing_last_name'] : null;
+
+
+
+
+
+
+
+
 
 
 
@@ -5932,7 +11624,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // If both are empty, try from order?
+
+
+
+
+
+
+
+
 
 
 
@@ -5948,7 +11656,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         @$lead_last = $cartAddress['last_name'];
+
+
+
+
+
+
+
+
 
 
 
@@ -5964,6 +11688,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         if (empty($lead_first) && empty($lead_last)) {
 
 
@@ -5972,7 +11704,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // If both are empty
+
+
+
+
+
+
+
+
 
 
 
@@ -5988,9 +11736,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            @$lead_last = $cartAddress2['last_name'];
 
+
+
+
+
+
+
+
+                            @$lead_last = $cartAddress2['last_name'];
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -6006,7 +11769,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // If both are empty
+
+
+
+
+
+
+
+
 
 
 
@@ -6022,9 +11801,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            @$lead_last = isset($data['shipping_last_name']) ? $data['shipping_last_name'] : null;
 
+
+
+
+
+
+
+
+                            @$lead_last = isset($data['shipping_last_name']) ? $data['shipping_last_name'] : null;
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -6040,7 +11834,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // If both are empty
+
+
+
+
+
+
+
+
 
 
 
@@ -6056,11 +11866,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             @$lead_last = wpme_get_last_name_from_request();
-
                         }
-
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -6076,7 +11900,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-3 Lead info to be created: ' . print_r(array($lead_first, $lead_last, $cartAddress, $cartAddress2), true));
+
+
+
+
+
+
+
+
 
 
 
@@ -6092,7 +11932,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $lead_id = null;
+
+
+
+
+
+
+
+
 
 
 
@@ -6108,7 +11964,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCUOM-2B-2A-3A-1 Trying to get lead by email.');
+
+
+
+
+
+
+
+
 
 
 
@@ -6124,7 +11996,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // NO lead, create one
+
+
+
+
+
+
+
+
 
 
 
@@ -6140,7 +12028,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCUOM-2B-2A-3A-1B-2 Creating one, leadtype: ' . $leadTypeFirst);
+
+
+
+
+
+
+
+
 
 
 
@@ -6156,6 +12060,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         if ($leadTypeFirst !== false && !is_null($leadTypeFirst) && is_numeric($leadTypeFirst)) {
 
 
@@ -6164,9 +12076,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            $leadType = $leadTypeFirst;
 
+
+
+
+
+
+
+
+                            $leadType = $leadTypeFirst;
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -6182,7 +12109,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             'genoo_wpme_lead_creation_attributes',
+
+
+
+
+
+
+
+
 
 
 
@@ -6198,7 +12141,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 'organization' => '',
+
+
+
+
+
+
+
+
 
 
 
@@ -6214,7 +12173,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 'address2' => $cartAddress['address_2'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6230,7 +12205,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 'country' => $cartAddress['country'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6246,7 +12237,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 'mobilephone' => $cartAddress['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6262,7 +12269,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6278,7 +12301,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         );
+
+
+
+
+
+
+
+
 
 
 
@@ -6294,7 +12333,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCUOM-2B-2A-3A-1B-2B Lead Attributes after filter: ' . print_r($attributes, true));
+
+
+
+
+
+
+
+
 
 
 
@@ -6310,7 +12365,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             (int)$leadType,
+
+
+
+
+
+
+
+
 
 
 
@@ -6326,7 +12397,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $lead_first,
+
+
+
+
+
+
+
+
 
 
 
@@ -6342,7 +12429,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             '',
+
+
+
+
+
+
+
+
 
 
 
@@ -6358,6 +12461,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $attributes
 
 
@@ -6366,7 +12477,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         );
+
+
+
+
+
+
+
+
 
 
 
@@ -6382,7 +12509,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $leadNew = (int)$leadNew;
+
+
+
+
+
+
+
+
 
 
 
@@ -6398,9 +12541,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            clearRefferalFromSession();
 
+
+
+
+
+
+
+
+                            clearRefferalFromSession();
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -6416,7 +12574,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // We have a lead id
+
+
+
+
+
+
+
+
 
 
 
@@ -6432,7 +12606,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Set cookie
+
+
+
+
+
+
+
+
 
 
 
@@ -6448,9 +12638,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 Created NEW LEAD for EMAIL :' . $email . ' : LEAD ID ' . $lead_id);
 
+
+
+
+
+
+
+
+                            wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 Created NEW LEAD for EMAIL :' . $email . ' : LEAD ID ' . $lead_id);
                         } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -6466,6 +12671,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 response:');
 
 
@@ -6474,10 +12687,16 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             wpme_simple_log_2($WPME_API->http->response['body']);
-
                         }
-
                     } catch (\Exception $e) {
 
 
@@ -6486,9 +12705,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        wpme_simple_log_2('WCUOM-2B-2A-3B-1 Error GETTING or CREATING lead by EMAIL :' . $email . ' : ' . $e->getMessage());
 
+
+
+
+
+
+
+
+                        wpme_simple_log_2('WCUOM-2B-2A-3B-1 Error GETTING or CREATING lead by EMAIL :' . $email . ' : ' . $e->getMessage());
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -6504,7 +12738,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     // 2.1 Set to new order
+
+
+
+
+
+
+
+
 
 
 
@@ -6520,7 +12770,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCUOM-2B-2A-4-1 Lead exists, creating order. lead id: ' . $lead_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -6536,7 +12802,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartContents = \WPME\WooCommerce\VariantCart::convertCartToObject($cart->cart_contents);
+
+
+
+
+
+
+
+
 
 
 
@@ -6552,7 +12834,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -6568,7 +12866,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // $cartOrder->actionNewOrder();
+
+
+
+
+
+
+
+
 
 
 
@@ -6584,7 +12898,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6600,7 +12930,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6616,7 +12962,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6632,7 +12994,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             '',
+
+
+
+
+
+
+
+
 
 
 
@@ -6648,7 +13026,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         );
+
+
+
+
+
+
+
+
 
 
 
@@ -6664,7 +13058,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress2['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6680,7 +13090,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress2['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6696,7 +13122,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress2['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -6712,7 +13154,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             '',
+
+
+
+
+
+
+
+
 
 
 
@@ -6728,7 +13186,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         );
+
+
+
+
+
+
+
+
 
 
 
@@ -6744,6 +13218,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->currency = $order->get_order_currency();
 
 
@@ -6752,7 +13234,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -6768,7 +13266,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->addItemsArray($cartContents);
+
+
+
+
+
+
+
+
 
 
 
@@ -6784,7 +13298,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         //ec_lead_type_id = lead type ID
+
+
+
+
+
+
+
+
 
 
 
@@ -6800,7 +13330,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $leadTYpe = wpme_get_customer_lead_type();
+
+
+
+
+
+
+
+
 
 
 
@@ -6816,7 +13362,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->changed->ec_lead_type_id = $leadTYpe;
+
+
+
+
+
+
+
+
 
 
 
@@ -6832,7 +13394,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->changed->email_ordered_from = $email;
+
+
+
+
+
+
+
+
 
 
 
@@ -6848,7 +13426,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->tax_amount = $order->get_total_tax();
+
+
+
+
+
+
+
+
 
 
 
@@ -6864,7 +13458,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -6880,7 +13490,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -6896,7 +13522,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         if ($cartOrderEmail !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -6912,9 +13554,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                            $cartOrder->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                            $cartOrder->changed->email_ordered_from = $cartOrderEmail;
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -6930,7 +13587,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // Continue
+
+
+
+
+
+
+
+
 
 
 
@@ -6946,7 +13619,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // Set order meta
+
+
+
+
+
+
+
+
 
 
 
@@ -6962,7 +13651,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // Remove session id
+
+
+
+
+
+
+
+
 
 
 
@@ -6978,7 +13683,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // Log
+
+
+
+
+
+
+
+
 
 
 
@@ -6994,9 +13715,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        wpme_simple_log_2('WCUOM-2B-2A-4-3 Finished ORDER, WooCommerce ID:' . $order_id);
 
+
+
+
+
+
+
+
+                        wpme_simple_log_2('WCUOM-2B-2A-4-3 Finished ORDER, WooCommerce ID:' . $order_id);
                     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -7012,10 +13748,16 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCUOM-2B-2A-5-2 Last API response: ' . print_r($WPME_API->http, true));
-
                     }
-
                 } else {
 
 
@@ -7024,13 +13766,26 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2B-1 No email for order, can\'t continue');
-
                 }
-
             }
-
         }, 100, 2);
+
+
+
+
+
+
+
+
 
 
 
@@ -7046,7 +13801,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Order furfilled
+
+
+
+
+
+
+
+
 
 
 
@@ -7062,7 +13833,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('woocommerce_payment_complete', function ($order_id) {
+
+
+
+
+
+
+
+
 
 
 
@@ -7086,7 +13873,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -7102,7 +13913,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (function_exists('wcs_get_subscriptions_for_order')) :
+
+
+
+
+
+
+
+
 
 
 
@@ -7118,7 +13945,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'order_type' => 'any'
+
+
+
+
+
+
+
+
 
 
 
@@ -7134,7 +13977,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             endif;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7166,7 +14033,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (!empty($subscriptions_ids) && $getrenewal) :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7198,7 +14097,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     $manual = get_post_meta($subscriptions_id->id, '_requires_manual_renewal', true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7230,7 +14161,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         $get_order = wc_get_order($subscriptions_id->id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7254,7 +14217,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $changedItemData = $item->get_data();
+
+
+
+
+
+
+
+
 
 
 
@@ -7270,7 +14249,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $id = (int)get_post_meta($changedItemData['product_id'], WPMKTENGINE_PRODUCT_KEY, true);
+
+
+
+
+
+
+
+
 
 
 
@@ -7286,7 +14281,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 $array['product_id'] = $id;
+
+
+
+
+
+
+
+
 
 
 
@@ -7302,7 +14313,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 $array['total_price'] = $changedItemData['total'];
+
+
+
+
+
+
+
+
 
 
 
@@ -7318,7 +14345,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 $array['external_product_id'] = $changedItemData['product_id'];
+
+
+
+
+
+
+
+
 
 
 
@@ -7334,11 +14377,41 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 $wpmeApiOrderItems[] = $array;
-
                             }
-
                         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7370,7 +14443,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WPC-2 Payment Complete for order: ' . $order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -7386,6 +14475,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         if (isset($WPME_API) && !empty($id)) {
 
 
@@ -7394,7 +14491,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             wpme_simple_log_2('WPC-3A-1 Order found, changing status.');
+
+
+
+
+
+
+
+
 
 
 
@@ -7418,6 +14531,22 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             $cartOrder = new \WPME\Ecommerce\CartOrder($order_genoo_id);
 
 
@@ -7426,7 +14555,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7450,7 +14603,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder = new \WPME\Ecommerce\CartOrder();
+
+
+
+
+
+
+
+
 
 
 
@@ -7466,7 +14635,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -7482,6 +14667,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->actionNewOrder();
 
 
@@ -7490,7 +14683,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -7506,7 +14715,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartAddress2 = $order->get_address('shipping');
+
+
+
+
+
+
+
+
 
 
 
@@ -7522,7 +14747,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -7538,7 +14779,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->setBillingAddress($cartAddress['address_1'], $cartAddress['address_2'], $cartAddress['city'], $cartAddress['country'], $cartAddress['phone'], $cartAddress['postcode'], '', $cartAddress['state']);
+
+
+
+
+
+
+
+
 
 
 
@@ -7554,7 +14811,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->order_number = $order_id;
+
+
+
+
+
+
+
+
 
 
 
@@ -7570,7 +14843,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->setTotal($order->get_total());
+
+
+
+
+
+
+
+
 
 
 
@@ -7586,7 +14875,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Add email and leadType
+
+
+
+
+
+
+
+
 
 
 
@@ -7602,7 +14907,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             //email_ordered_from = email address making the sale
+
+
+
+
+
+
+
+
 
 
 
@@ -7618,6 +14939,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->ec_lead_type_id = $leadTYpe;
 
 
@@ -7626,7 +14955,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -7642,6 +14987,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->email_ordered_from = $email;
 
 
@@ -7650,7 +15003,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -7666,7 +15035,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -7682,7 +15067,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -7698,7 +15099,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -7714,7 +15131,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 ->changed->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -7730,7 +15163,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $cartOrderEmail = \WPME\WooCommerce\Helper::getEmailFromOrder($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -7746,7 +15195,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 $cartOrder->email_ordered_from = $cartOrderEmail;
+
+
+
+
+
+
+
+
 
 
 
@@ -7762,9 +15227,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                                    ->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                                    ->changed->email_ordered_from = $cartOrderEmail;
                             }
+
+
+
+
+
+
+
+
 
 
 
@@ -7780,7 +15260,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Continue
+
+
+
+
+
+
+
+
 
 
 
@@ -7796,7 +15292,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             // Set order meta
+
+
+
+
+
+
+
+
 
 
 
@@ -7820,7 +15332,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             try {
+
+
+
+
+
+
+
+
 
 
 
@@ -7836,7 +15372,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 $cartOrder->order_status = 'subrenewal';
+
+
+
+
+
+
+
+
 
 
 
@@ -7852,7 +15404,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                     ->changed->order_status = 'subrenewal';
+
+
+
+
+
+
+
+
 
 
 
@@ -7876,6 +15444,22 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 $WPME_API->updateCart($cartOrder->id, (array)$cartOrder->getPayload());
 
 
@@ -7884,9 +15468,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                                wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+                                wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
                             } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -7902,11 +15501,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 wpme_simple_log_2('FAILED to updated order to PROCESSING :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
                             }
-
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -7922,6 +15535,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 endforeach; // Payed!
 
 
@@ -7930,9 +15551,32 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            endif;
 
+
+
+
+
+
+
+
+            endif;
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7956,6 +15600,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Order Failed
 
 
@@ -7964,7 +15616,47 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8004,7 +15696,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Get API
+
+
+
+
+
+
+
+
 
 
 
@@ -8020,7 +15728,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Genoo order ID
+
+
+
+
+
+
+
+
 
 
 
@@ -8036,7 +15760,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (isset($WPME_API) && !empty($id)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8052,7 +15792,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder = new \WPME\Ecommerce\CartOrder($id);
+
+
+
+
+
+
+
+
 
 
 
@@ -8068,7 +15824,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Total price
+
+
+
+
+
+
+
+
 
 
 
@@ -8084,7 +15856,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->tax_amount = $order->get_total_tax();
+
+
+
+
+
+
+
+
 
 
 
@@ -8100,7 +15888,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Completed?
+
+
+
+
+
+
+
+
 
 
 
@@ -8116,7 +15920,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -8132,7 +15952,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -8148,7 +15984,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 if ($cartOrderEmail !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8164,6 +16016,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder
 
 
@@ -8172,9 +16032,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        ->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                        ->changed->email_ordered_from = $cartOrderEmail;
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -8190,7 +16065,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_get_order_stream_decipher($order, $cartOrder);
+
+
+
+
+
+
+
+
 
 
 
@@ -8206,9 +16097,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+                    wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
                 } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8224,13 +16130,34 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('FAILED to updated order to PROCESSING :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
                 }
-
             }
-
         }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8254,7 +16181,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Order Refunded
+
+
+
+
+
+
+
+
 
 
 
@@ -8270,7 +16213,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('woocommerce_order_status_refunded', function ($order_id) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8286,7 +16245,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -8302,7 +16277,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $id = get_post_meta($order_id, WPMKTENGINE_ORDER_KEY, true);
+
+
+
+
+
+
+
+
 
 
 
@@ -8318,7 +16309,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -8334,7 +16341,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -8350,7 +16373,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->financial_status = 'refunded';
+
+
+
+
+
+
+
+
 
 
 
@@ -8366,6 +16405,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->order_status = 'refunded';
 
 
@@ -8374,7 +16421,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -8398,6 +16461,22 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $subscription_product_name = get_wpme_subscription_activity_name($order_id);
 
 
@@ -8406,7 +16485,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $subscription_product_name_values = implode("," . " ", $subscription_product_name);
+
+
+
+
+
+
+
+
 
 
 
@@ -8430,7 +16525,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -8446,7 +16565,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'order refund full',
+
+
+
+
+
+
+
+
 
 
 
@@ -8462,6 +16597,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $subscription_product_name_values, // Content
 
 
@@ -8470,7 +16613,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     ' '
+
+
+
+
+
+
+
+
 
 
 
@@ -8494,7 +16653,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 );
+
+
+
+
+
+
+
+
 
 
 
@@ -8510,7 +16693,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->refund_date = \WPME\Ecommerce\Utils::getDateTime();
+
+
+
+
+
+
+
+
 
 
 
@@ -8526,7 +16725,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 try {
+
+
+
+
+
+
+
+
 
 
 
@@ -8542,9 +16757,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    wpme_simple_log_2('UPDATED ORDER to REFUNDED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+                    wpme_simple_log_2('UPDATED ORDER to REFUNDED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
                 } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8560,12 +16790,17 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('FAILED to update order to REFUNDED :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
                 }
-
             }
-
         }, 10, 1);
 
 
@@ -8582,7 +16817,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -8598,7 +16857,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Update product
+
+
+
+
+
+
+
+
 
 
 
@@ -8614,6 +16889,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('save_post', function ($post_id, $post, $update) {
 
 
@@ -8622,7 +16905,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // If this isn't product, do nothing
+
+
+
+
+
+
+
+
 
 
 
@@ -8638,9 +16937,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                return;
 
+
+
+
+
+
+
+
+                return;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -8656,6 +16970,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (wp_is_post_revision($post_id)) {
 
 
@@ -8664,9 +16986,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                return;
 
+
+
+
+
+
+
+
+                return;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -8682,7 +17019,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -8698,7 +17051,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Do we have product ID already?
+
+
+
+
+
+
+
+
 
 
 
@@ -8714,7 +17083,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $data = \WPME\WooCommerce\Product::convertToProductArray($post);
+
+
+
+
+
+
+
+
 
 
 
@@ -8730,7 +17115,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -8746,6 +17147,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $result = $WPME_API->updateProduct((int)$meta, $data);
 
 
@@ -8754,8 +17163,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        wpme_simple_log_2('UPDATING PRODUCT, Genoo ID:' . (int)$meta);
 
+
+
+
+
+
+
+
+                        wpme_simple_log_2('UPDATING PRODUCT, Genoo ID:' . (int)$meta);
                     } catch (\Exception $e) {
 
 
@@ -8764,11 +17180,25 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('FAILED UPDATING PRODUCT, Genoo ID:' . (int)$meta . ' : ' . $e->getMessage());
-
                     }
-
                 } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -8784,7 +17214,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $result = $WPME_API->setProduct($data);
+
+
+
+
+
+
+
+
 
 
 
@@ -8800,8 +17246,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                        wpme_simple_log_2('CREATING PRODUCT, Genoo ID:' . (int)$meta);
 
+
+
+
+
+
+
+
+                        wpme_simple_log_2('CREATING PRODUCT, Genoo ID:' . (int)$meta);
                     } catch (\Exception $e) {
 
 
@@ -8810,14 +17263,18 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('FAILED CREATING PRODUCT, Genoo ID:' . (int)$meta . ' : ' . $e->getMessage());
-
                     }
-
                 }
-
             }
-
         }, 10, 3);
 
 
@@ -8834,7 +17291,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -8850,7 +17331,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -8866,7 +17363,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -8882,6 +17395,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if ('shop_order' != $post->post_type) {
 
 
@@ -8890,9 +17411,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                return;
 
+
+
+
+
+
+
+
+                return;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -8908,6 +17444,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (wp_is_post_revision($post_id)) {
 
 
@@ -8916,9 +17460,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                return;
 
+
+
+
+
+
+
+
+                return;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -8934,7 +17493,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (isset($WPME_API)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8950,7 +17525,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $meta = get_post_meta($post_id, WPMKTENGINE_ORDER_KEY, true);
+
+
+
+
+
+
+
+
 
 
 
@@ -8966,7 +17557,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     // Order has not yet been saved into API and that's a shame!
+
+
+
+
+
+
+
+
 
 
 
@@ -8982,11 +17589,33 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 }
-
             }
-
         }, 10, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9010,7 +17639,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Partial Refund
+
+
+
+
+
+
+
+
 
 
 
@@ -9026,7 +17671,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('woocommerce_order_partially_refunded', function ($order_id, $refund_id) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9050,7 +17711,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9082,7 +17775,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             $id = get_post_meta($order_id, WPMKTENGINE_ORDER_KEY, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9114,7 +17839,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9146,7 +17903,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9170,7 +17959,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Refunded?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9202,7 +18015,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $cartOrder->order_status = 'refund partial';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9250,7 +18095,55 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $subscription_product_name = get_wpme_subscription_activity_name($order_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9282,7 +18175,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $genoo_lead_id =  get_wpme_order_lead_id($id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9314,7 +18239,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     $genoo_lead_id,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9346,7 +18303,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     $subscription_product_name_values, // Title  $order->parent_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9378,7 +18367,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     ' '
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9426,7 +18447,55 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9458,7 +18527,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $cartOrder->refund_date = \WPME\Ecommerce\Utils::getDateTime();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9490,7 +18591,39 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 try {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9522,9 +18655,40 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    wpme_simple_log_2('UPDATED ORDER to REFUNDED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    wpme_simple_log_2('UPDATED ORDER to REFUNDED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
                 } catch (\Exception $e) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9556,13 +18720,42 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('FAILED to update order to REFUNDED :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
                 }
-
             }
-
         }, 10, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9586,7 +18779,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Order cancelled
+
+
+
+
+
+
+
+
 
 
 
@@ -9602,7 +18811,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('woocommerce_order_status_cancelled', function ($order_id) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9618,6 +18843,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
 
 
@@ -9626,7 +18859,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             // Genoo order ID
+
+
+
+
+
+
+
+
 
 
 
@@ -9650,7 +18899,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (isset($WPME_API) && !empty($id)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9666,7 +18939,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder = new \WPME\Ecommerce\CartOrder($id);
+
+
+
+
+
+
+
+
 
 
 
@@ -9682,7 +18971,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Total price
+
+
+
+
+
+
+
+
 
 
 
@@ -9698,7 +19003,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Refunded?
+
+
+
+
+
+
+
+
 
 
 
@@ -9714,7 +19035,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -9730,7 +19067,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 // Completed?
+
+
+
+
+
+
+
+
 
 
 
@@ -9746,7 +19099,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->refund_amount = $order->get_total_refunded();
+
+
+
+
+
+
+
+
 
 
 
@@ -9762,7 +19131,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_get_order_stream_decipher($order, $cartOrder);
+
+
+
+
+
+
+
+
 
 
 
@@ -9778,6 +19163,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $genoo_lead_id = get_wpme_order_lead_id($id);
 
 
@@ -9786,7 +19179,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     $subscription_product_name = get_wpme_subscription_activity_name($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -9810,7 +19219,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -9826,7 +19259,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         'cancelled order',
+
+
+
+
+
+
+
+
 
 
 
@@ -9842,7 +19291,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $subscription_product_name_values, // Content
+
+
+
+
+
+
+
+
 
 
 
@@ -9858,7 +19323,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         // Permalink
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9898,9 +19387,40 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    wpme_simple_log_2('UPDATED ORDER to REFUNDED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    wpme_simple_log_2('UPDATED ORDER to REFUNDED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
                 } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9916,13 +19436,34 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('FAILED to update order to REFUNDED :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
                 }
-
             }
-
         }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9946,9 +19487,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-        add_action('delete_post', function ($post_id) {
 
+
+
+
+
+
+
+
+        add_action('delete_post', function ($post_id) {
         }, 10, 1);
+
+
+
+
+
+
+
+
 
 
 
@@ -9957,8 +19513,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_check_new_order_items', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -9967,8 +19530,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_resume_order', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -9977,8 +19547,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_checkout_order_review', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -9987,8 +19564,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_cart_has_errors', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -9997,8 +19581,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_checkout_billing', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -10007,8 +19598,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_checkout_shipping', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -10017,8 +19615,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_checkout_order_review', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -10027,8 +19632,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_cart_contents_review_order', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -10037,8 +19649,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_thankyou', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -10047,8 +19666,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_cart_contents', function () {
-
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -10057,8 +19683,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_cart_emptied', function () {
-
         }, 10, 1);
+
+
+
+
+
+
+
+
 
 
 
@@ -10067,7 +19700,6 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
         add_action('woocommerce_checkout_update_user_meta', function () {
-
         });
 
 
@@ -10076,8 +19708,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-        add_action('woocommerce_checkout_update_order_review', function ($post_data) {
 
+
+
+
+
+
+
+
+        add_action('woocommerce_checkout_update_order_review', function ($post_data) {
         }, 10, 1);
 
 
@@ -10086,8 +19725,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-        add_action('woocommerce_customer_save_address', function ($user_id, $load_address) {
 
+
+
+
+
+
+
+
+        add_action('woocommerce_customer_save_address', function ($user_id, $load_address) {
         }, 10, 2);
 
 
@@ -10104,7 +19750,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -10120,7 +19790,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -10136,6 +19822,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $meta[] = 'wpme_product_id';
 
 
@@ -10144,8 +19838,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            return $meta;
 
+
+
+
+
+
+
+
+            return $meta;
         }, 100, 1);
 
 
@@ -10162,7 +19863,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -10178,7 +19903,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -10194,7 +19935,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $pageImport = '<p>' . __('Note: Import all your products into your account.', 'wpmktengine') . '</p>';
+
+
+
+
+
+
+
+
 
 
 
@@ -10210,7 +19967,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $page->widgets = array_merge(array(
+
+
+
+
+
+
+
+
 
 
 
@@ -10226,7 +19999,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'title' => 'WooCommerce Products Import',
+
+
+
+
+
+
+
+
 
 
 
@@ -10242,7 +20031,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 )
+
+
+
+
+
+
+
+
 
 
 
@@ -10258,8 +20063,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            return $page;
 
+
+
+
+
+
+
+
+            return $page;
         }, 10, 1);
 
 
@@ -10276,7 +20088,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -10292,7 +20128,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -10308,7 +20160,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             wp_enqueue_script('wpmktgengine-woocommerce', WPMKTENGINE_ECOMMERCE_FOLDER . '/wpmktgengine-woocommerce.js', array(
+
+
+
+
+
+
+
+
 
 
 
@@ -10324,8 +20192,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            ), WPMKTENGINE_ECOMMERCE_REFRESH);
 
+
+
+
+
+
+
+
+            ), WPMKTENGINE_ECOMMERCE_REFRESH);
         }, 10, 1);
 
 
@@ -10342,7 +20217,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -10358,7 +20257,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -10374,8 +20289,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            echo '<style> body #genooLog { width: 90%; clear: both; margin-left: 7.5px; display: block; }</style>';
 
+
+
+
+
+
+
+
+            echo '<style> body #genooLog { width: 90%; clear: both; margin-left: 7.5px; display: block; }</style>';
         }, 10, 1);
 
 
@@ -10392,7 +20314,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -10408,6 +20354,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
 
 
@@ -10424,7 +20378,31 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**
+
+
+
+
+
+
+
+
 
 
 
@@ -10440,7 +20418,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          */
+
+
+
+
+
+
+
+
 
 
 
@@ -10456,7 +20450,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $args = array(
+
+
+
+
+
+
+
+
 
 
 
@@ -10472,7 +20482,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 'post_type' => 'product',
+
+
+
+
+
+
+
+
 
 
 
@@ -10488,7 +20514,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 'post_status' => 'publish'
+
+
+
+
+
+
+
+
 
 
 
@@ -10504,7 +20546,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $posts = get_posts($args);
+
+
+
+
+
+
+
+
 
 
 
@@ -10520,7 +20578,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if ($total_post_count > 0) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10536,6 +20610,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'found' => $total_post_count
 
 
@@ -10544,9 +20626,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                ));
 
+
+
+
+
+
+
+
+                ));
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -10562,6 +20659,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 'error' => 'No published products found.'
 
 
@@ -10570,9 +20675,32 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-            ));
 
+
+
+
+
+
+
+
+            ));
         }, 10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10596,7 +20724,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
          * Import of the products
+
+
+
+
+
+
+
+
 
 
 
@@ -10612,7 +20756,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
         add_action('wp_ajax_wpme_import_products', function () {
+
+
+
+
+
+
+
+
 
 
 
@@ -10628,7 +20788,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -10644,7 +20820,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             $per = $_REQUEST['per'] === null ? 0 : $_REQUEST['per'];
+
+
+
+
+
+
+
+
 
 
 
@@ -10660,7 +20852,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
             if (isset($WPME_API)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10676,7 +20884,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 $productsImport = array();
+
+
+
+
+
+
+
+
 
 
 
@@ -10692,7 +20916,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'posts_per_page' => $per,
+
+
+
+
+
+
+
+
 
 
 
@@ -10708,7 +20948,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'post_type' => 'product',
+
+
+
+
+
+
+
+
 
 
 
@@ -10724,7 +20980,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'orderby' => 'ID',
+
+
+
+
+
+
+
+
 
 
 
@@ -10740,7 +21012,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 ));
+
+
+
+
+
+
+
+
 
 
 
@@ -10756,7 +21044,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     foreach ($products as $product) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10772,7 +21076,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $meta = \get_post_meta($product->ID, WPMKTENGINE_PRODUCT_KEY);
+
+
+
+
+
+
+
+
 
 
 
@@ -10788,6 +21108,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $productArray = \WPME\WooCommerce\Product::convertToProductArray($product);
 
 
@@ -10796,13 +21124,26 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             $productsImport[] = $productArray;
-
                         }
-
                     }
-
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -10818,7 +21159,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -10834,7 +21191,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $updated = $WPME_API->setProducts($productsImport);
+
+
+
+
+
+
+
+
 
 
 
@@ -10850,7 +21223,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                             foreach ($updated as $updatedProduct) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10866,7 +21255,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                 if ($updatedProduct->result == 'success') {
+
+
+
+
+
+
+
+
 
 
 
@@ -10882,7 +21287,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                     $messages[] = 'Product ID: ' . $updatedProduct->external_product_id . ' imported.';
+
+
+
+
+
+
+
+
 
 
 
@@ -10898,8 +21319,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                                    update_post_meta($updatedProduct->external_product_id, WPMKTENGINE_PRODUCT_KEY, $updatedProduct->product_id);
 
+
+
+
+
+
+
+
+                                    update_post_meta($updatedProduct->external_product_id, WPMKTENGINE_PRODUCT_KEY, $updatedProduct->product_id);
                                 } else {
 
 
@@ -10908,15 +21336,27 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                                     $messages[] = 'Product ID: ' . $updatedProduct->external_product_id . ' not imported. Result: ' . print_r($updatedProduct, true);
-
                                 }
-
                             }
-
                         }
-
                     } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10932,10 +21372,16 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                         $messages .= ' at ' . $WPME_API->lastQuery;
-
                     }
-
                 } else {
 
 
@@ -10944,8 +21390,15 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                    $messages = 'No products to be imported.';
 
+
+
+
+
+
+
+
+                    $messages = 'No products to be imported.';
                 }
 
 
@@ -10954,7 +21407,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 genoo_wpme_on_return(array(
+
+
+
+
+
+
+
+
 
 
 
@@ -10970,9 +21439,24 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
-                ));
 
+
+
+
+
+
+
+
+                ));
             } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -10988,6 +21472,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                     'messages' => 'Error: API not found.'
 
 
@@ -10996,15 +21488,35 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
                 ));
-
             }
-
         }, 10);
-
     }
-
 }, 10, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11028,6 +21540,14 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
  * Genoo / WPME deactivation function
 
 
@@ -11036,7 +21556,23 @@ add_action('wpmktengine_init', function ($repositarySettings, $api, $cache) {
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
 
 
 
@@ -11060,7 +21596,31 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -11076,7 +21636,23 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
      * @param $message
+
+
+
+
+
+
+
+
 
 
 
@@ -11092,7 +21668,31 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11116,7 +21716,23 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
     {
+
+
+
+
+
+
+
+
 
 
 
@@ -11132,7 +21748,23 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+
+
+
+
+
+
+
 
 
 
@@ -11148,7 +21780,23 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
         deactivate_plugins($file);
+
+
+
+
+
+
+
+
 
 
 
@@ -11164,7 +21812,23 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
         // Recover link
+
+
+
+
+
+
+
+
 
 
 
@@ -11180,9 +21844,24 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
-            $recover = '</p><p><a href="' . admin_url('plugins.php') . '">&laquo; ' . __('Back to plugins.', 'wpmktengine') . '</a>';
 
+
+
+
+
+
+
+
+            $recover = '</p><p><a href="' . admin_url('plugins.php') . '">&laquo; ' . __('Back to plugins.', 'wpmktengine') . '</a>';
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -11198,6 +21877,14 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
         wp_die($message . $recover);
 
 
@@ -11206,11 +21893,33 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
         exit();
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11234,6 +21943,14 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
  * Genoo / WPME json return data
 
 
@@ -11242,7 +21959,23 @@ if (!function_exists('genoo_wpme_deactivate_plugin')) {
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
 
 
 
@@ -11266,7 +21999,31 @@ if (!function_exists('genoo_wpme_on_return')) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -11282,7 +22039,31 @@ if (!function_exists('genoo_wpme_on_return')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11306,7 +22087,23 @@ if (!function_exists('genoo_wpme_on_return')) {
 
 
 
+
+
+
+
+
+
+
+
     {
+
+
+
+
+
+
+
+
 
 
 
@@ -11322,6 +22119,14 @@ if (!function_exists('genoo_wpme_on_return')) {
 
 
 
+
+
+
+
+
+
+
+
         header('Content-type: application/json');
 
 
@@ -11330,11 +22135,33 @@ if (!function_exists('genoo_wpme_on_return')) {
 
 
 
+
+
+
+
+
+
+
+
         die(json_encode($data));
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11358,7 +22185,23 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -11374,7 +22217,23 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
+
+
+
+
+
+
+
+
      *
+
+
+
+
+
+
+
+
 
 
 
@@ -11390,7 +22249,23 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
 
 
 
@@ -11406,7 +22281,23 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
+
+
+
+
+
+
+
+
     {
+
+
+
+
+
+
+
+
 
 
 
@@ -11422,7 +22313,23 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
+
+
+
+
+
+
+
+
         $leadTypeSaved = get_option('WPME_ECOMMERCE');
+
+
+
+
+
+
+
+
 
 
 
@@ -11438,8 +22345,15 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
-            $leadType = (int)$leadTypeSaved['genooLeadUsercustomer'];
 
+
+
+
+
+
+
+
+            $leadType = (int)$leadTypeSaved['genooLeadUsercustomer'];
         }
 
 
@@ -11448,11 +22362,33 @@ if (!function_exists('wpme_get_customer_lead_type')) {
 
 
 
+
+
+
+
+
+
+
+
         return $leadType === 0 ? false : $leadType;
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11476,7 +22412,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -11492,7 +22444,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
      *
+
+
+
+
+
+
+
+
 
 
 
@@ -11508,7 +22476,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
      * @param $email
+
+
+
+
+
+
+
+
 
 
 
@@ -11524,7 +22508,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
 
 
 
@@ -11540,7 +22540,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
     {
+
+
+
+
+
+
+
+
 
 
 
@@ -11556,7 +22572,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
         if ($can == true) {
+
+
+
+
+
+
+
+
 
 
 
@@ -11572,7 +22604,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
             $lead = $api->getLead($id);
+
+
+
+
+
+
+
+
 
 
 
@@ -11588,7 +22636,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
                 ->lead
+
+
+
+
+
+
+
+
 
 
 
@@ -11604,7 +22668,23 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
                 $leadEmail = $lead
+
+
+
+
+
+
+
+
 
 
 
@@ -11620,8 +22700,15 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
-                return (string)$leadEmail == (string)$email;
 
+
+
+
+
+
+
+
+                return (string)$leadEmail == (string)$email;
             }
 
 
@@ -11630,8 +22717,15 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
-            return false;
 
+
+
+
+
+
+
+
+            return false;
         }
 
 
@@ -11640,11 +22734,33 @@ if (!function_exists('wpme_can_continue_cookie_email')) {
 
 
 
+
+
+
+
+
+
+
+
         return false;
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11676,7 +22792,31 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -11692,7 +22832,23 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
      * @param string $filename
+
+
+
+
+
+
+
+
 
 
 
@@ -11708,7 +22864,23 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
 
 
 
@@ -11724,7 +22896,23 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
     {
+
+
+
+
+
+
+
+
 
 
 
@@ -11740,7 +22928,23 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
         @date_default_timezone_set('UTC');
+
+
+
+
+
+
+
+
 
 
 
@@ -11756,7 +22960,23 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
         @$time = '[' . $time . '] ';
+
+
+
+
+
+
+
+
 
 
 
@@ -11772,6 +22992,14 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
         if (is_array($msg) || is_object($msg)) {
 
 
@@ -11780,9 +23008,24 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
-            $msg = print_r($msg, true);
 
+
+
+
+
+
+
+
+            $msg = print_r($msg, true);
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -11798,7 +23041,23 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
         $log_file_data = './log.log';
+
+
+
+
+
+
+
+
 
 
 
@@ -11814,6 +23073,14 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
+
+
+
+
+
+
+
+
         // file_put_contents($log_file_data, $msg . "\n", FILE_APPEND);
 
 
@@ -11822,9 +23089,32 @@ if (!function_exists('wpme_simple_log_2')) {
 
 
 
-    }
 
+
+
+
+
+
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11848,7 +23138,23 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -11864,7 +23170,23 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
      *
+
+
+
+
+
+
+
+
 
 
 
@@ -11880,7 +23202,23 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
 
 
 
@@ -11896,6 +23234,14 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
     {
 
 
@@ -11904,7 +23250,23 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
         if (isset($_POST)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -11920,7 +23282,23 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
             if ($first === null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -11936,6 +23314,14 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
                 if ($first === null) {
 
 
@@ -11944,10 +23330,16 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
                     @$first = isset($_POST['first_name']) ? $_POST['first_name'] : null;
-
                 }
-
             }
 
 
@@ -11956,8 +23348,15 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
-            return $first === null ? '' : $first;
 
+
+
+
+
+
+
+
+            return $first === null ? '' : $first;
         }
 
 
@@ -11966,11 +23365,25 @@ if (!function_exists('wpme_get_first_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
         return '';
-
     }
-
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -11986,7 +23399,23 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -12002,7 +23431,23 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
      *
+
+
+
+
+
+
+
+
 
 
 
@@ -12018,7 +23463,23 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
 
 
 
@@ -12034,7 +23495,23 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
     {
+
+
+
+
+
+
+
+
 
 
 
@@ -12050,7 +23527,23 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
             @$first = isset($_POST['billing_last_name']) ? $_POST['billing_last_name'] : null;
+
+
+
+
+
+
+
+
 
 
 
@@ -12066,7 +23559,23 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
                 @$first = isset($_POST['shipping_last_name']) ? $_POST['shipping_last_name'] : null;
+
+
+
+
+
+
+
+
 
 
 
@@ -12082,10 +23591,16 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
                     @$first = isset($_POST['last_name']) ? $_POST['last_name'] : null;
-
                 }
-
             }
 
 
@@ -12094,8 +23609,15 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
-            return $first === null ? '' : $first;
 
+
+
+
+
+
+
+
+            return $first === null ? '' : $first;
         }
 
 
@@ -12104,11 +23626,33 @@ if (!function_exists('wpme_get_last_name_from_request')) {
 
 
 
+
+
+
+
+
+
+
+
         return '';
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12132,7 +23676,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
     function wpme_clear_sess()
+
+
+
+
+
+
+
+
 
 
 
@@ -12148,7 +23708,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         return;
+
+
+
+
+
+
+
+
 
 
 
@@ -12164,6 +23740,14 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         unset($_COOKIE['c00referred_by_affiliate_id']);
 
 
@@ -12172,7 +23756,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         unset($_SESSION['c00referred_by_affiliate_id_date']);
+
+
+
+
+
+
+
+
 
 
 
@@ -12188,7 +23788,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         unset($_COOKIE['c00referred_by_affiliate_id_date']);
+
+
+
+
+
+
+
+
 
 
 
@@ -12204,7 +23820,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         @setcookie('c00sold_by_affiliate_id', false, -1, COOKIEPATH, COOKIE_DOMAIN);
+
+
+
+
+
+
+
+
 
 
 
@@ -12220,7 +23852,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         unset($_SESSION['c00sold_by_affiliate_id']);
+
+
+
+
+
+
+
+
 
 
 
@@ -12236,9 +23884,24 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
-            clearRefferalFromSession();
 
+
+
+
+
+
+
+
+            clearRefferalFromSession();
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -12254,6 +23917,14 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
             // Clear using js
 
 
@@ -12262,11 +23933,33 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
         }
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12290,7 +23983,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
  * Activity Stream Helper
+
+
+
+
+
+
+
+
 
 
 
@@ -12306,7 +24015,23 @@ if (!function_exists('wpme_clear_sess')) {
 
 
 
+
+
+
+
+
+
+
+
 function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activityName = '', $activityDescription = '', $activityURL = '')
+
+
+
+
+
+
+
+
 
 
 
@@ -12322,7 +24047,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
     wpme_on_wpme_api_set();
+
+
+
+
+
+
+
+
 
 
 
@@ -12338,7 +24079,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
     global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -12354,6 +24111,14 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         wpme_simple_log_2('WSC-05 - Putting Activity: - no api found');
 
 
@@ -12362,9 +24127,24 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -12380,7 +24160,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         $lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -12396,7 +24192,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         $activityName,
+
+
+
+
+
+
+
+
 
 
 
@@ -12412,6 +24224,14 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         $activityURL
 
 
@@ -12420,7 +24240,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
     ), true));
+
+
+
+
+
+
+
+
 
 
 
@@ -12444,7 +24280,31 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //$utc = 'now';
+
+
+
+
+
+
+
+
 
 
 
@@ -12460,7 +24320,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         $date = new DateTime("now", new DateTimeZone('America/Chicago'));
+
+
+
+
+
+
+
+
 
 
 
@@ -12476,9 +24352,24 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
-        $WPME_API->putActivity($lead_id, $dater, $activityType, $activityName, $activityDescription, $activityURL);
 
+
+
+
+
+
+
+
+        $WPME_API->putActivity($lead_id, $dater, $activityType, $activityName, $activityDescription, $activityURL);
     } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -12494,6 +24385,14 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         wpme_simple_log_2(var_export($WPME_API->callstack));
 
 
@@ -12502,11 +24401,33 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
         wpme_simple_log_2(var_export($WPME_API->http));
-
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12530,7 +24451,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
  * This utility function has been created after some back
+
+
+
+
+
+
+
+
 
 
 
@@ -12546,7 +24483,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
  * activity stream type should be for each action, name etc.
+
+
+
+
+
+
+
+
 
 
 
@@ -12562,7 +24515,23 @@ function wpme_fire_activity_stream($lead_id = null, $activityType = '', $activit
 
 
 
+
+
+
+
+
+
+
+
 function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrderStatus = false)
+
+
+
+
+
+
+
+
 
 
 
@@ -12578,7 +24547,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -12594,7 +24579,31 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12626,7 +24635,39 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (function_exists('wcs_get_subscriptions_for_order')) :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12650,7 +24691,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             'order_type' => 'any'
+
+
+
+
+
+
+
+
 
 
 
@@ -12674,7 +24731,39 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     endif;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12706,7 +24795,31 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
+
+
+
+
+
+
+
+
 
 
 
@@ -12722,7 +24835,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
      * payment declined(renewal failed and payment failed)
+
+
+
+
+
+
+
+
 
 
 
@@ -12738,7 +24867,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
     switch ($orderStatus) {
+
+
+
+
+
+
+
+
 
 
 
@@ -12754,7 +24899,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->order_status = 'New Order';
+
+
+
+
+
+
+
+
 
 
 
@@ -12770,7 +24931,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -12786,7 +24963,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             elseif (!empty($subscriptions_ids)) :
+
+
+
+
+
+
+
+
 
 
 
@@ -12802,7 +24995,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
                     ->changed->order_status = 'sub payment';
+
+
+
+
+
+
+
+
 
 
 
@@ -12818,6 +25027,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->financial_status = 'paid';
 
 
@@ -12826,7 +25043,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -12842,7 +25075,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->action = 'new order';
+
+
+
+
+
+
+
+
 
 
 
@@ -12858,6 +25107,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
                 ->changed->action = 'new order';
 
 
@@ -12866,7 +25123,39 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12898,6 +25187,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->order_status = 'Completed Order';
 
 
@@ -12906,7 +25203,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -12922,6 +25235,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->financial_status = 'paid';
 
 
@@ -12930,7 +25251,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -12946,6 +25283,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->action = 'completed order';
 
 
@@ -12954,7 +25299,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -12970,7 +25331,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             break;
+
+
+
+
+
+
+
+
 
 
 
@@ -12986,6 +25363,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->order_status = 'Order Cancelled';
 
 
@@ -12994,7 +25379,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -13010,6 +25411,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->financial_status = '';
 
 
@@ -13018,7 +25427,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder
+
+
+
+
+
+
+
+
 
 
 
@@ -13034,7 +25459,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->action = 'cancelled order';
+
+
+
+
+
+
+
+
 
 
 
@@ -13050,6 +25491,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
                 ->changed->action = 'cancelled order';
 
 
@@ -13058,7 +25507,31 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13082,6 +25555,14 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             // Search for: @@ PART REFUND
 
 
@@ -13090,10 +25571,16 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
             break;
-
     }
-
 }
 
 
@@ -13110,7 +25597,31 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
+
+
+
+
+
+
+
+
 
 
 
@@ -13126,7 +25637,23 @@ function wpme_get_order_stream_decipher(\WC_Order $order, &$cartOrder, $givenOrd
 
 
 
+
+
+
+
+
+
+
+
  */
+
+
+
+
+
+
+
+
 
 
 
@@ -13142,7 +25669,23 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
 {
+
+
+
+
+
+
+
+
 
 
 
@@ -13158,7 +25701,23 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
     // https://docs.woocommerce.com/document/subscriptions/develop/functions/
+
+
+
+
+
+
+
+
 
 
 
@@ -13174,7 +25733,23 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
     if ($order instanceof \WC_Subscription) {
+
+
+
+
+
+
+
+
 
 
 
@@ -13190,9 +25765,24 @@ function get_wpme_order_from_woo_order($order)
 
 
 
-        wpme_simple_log_2('WSC-05-A - Get order IDS ' . var_export($ids, true));
 
+
+
+
+
+
+
+
+        wpme_simple_log_2('WSC-05-A - Get order IDS ' . var_export($ids, true));
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -13208,6 +25798,14 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
         wpme_simple_log_2('WSC-05-B - RETURN , no IDS');
 
 
@@ -13216,9 +25814,24 @@ function get_wpme_order_from_woo_order($order)
 
 
 
-        return false;
 
+
+
+
+
+
+
+
+        return false;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -13234,7 +25847,23 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
     wpme_simple_log_2('WSC-05-C - RETURN, id' . $order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -13250,6 +25879,14 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
     wpme_simple_log_2('WSC-05-D - RETURN, genoo id ' . $genoo_id);
 
 
@@ -13258,9 +25895,32 @@ function get_wpme_order_from_woo_order($order)
 
 
 
-    return $genoo_id;
 
+
+
+
+
+
+
+
+    return $genoo_id;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13284,7 +25944,23 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
  * Get Lead ID from order
+
+
+
+
+
+
+
+
 
 
 
@@ -13300,7 +25976,23 @@ function get_wpme_order_from_woo_order($order)
 
 
 
+
+
+
+
+
+
+
+
 function get_wpme_order_lead_id($genoo_id)
+
+
+
+
+
+
+
+
 
 
 
@@ -13316,7 +26008,23 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
+
+
+
+
+
+
+
+
     // Api
+
+
+
+
+
+
+
+
 
 
 
@@ -13332,7 +26040,23 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
+
+
+
+
+
+
+
+
     global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -13348,9 +26072,24 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
-        return false;
 
+
+
+
+
+
+
+
+        return false;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -13366,6 +26105,14 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
+
+
+
+
+
+
+
+
     try {
 
 
@@ -13374,8 +26121,15 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
-        $order = $WPME_API->callCustom('/wpmeorders[S]', 'GET', $genoo_id);
 
+
+
+
+
+
+
+
+        $order = $WPME_API->callCustom('/wpmeorders[S]', 'GET', $genoo_id);
     } catch (\Exception $e) {
 
 
@@ -13384,8 +26138,15 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
-        return false;
 
+
+
+
+
+
+
+
+        return false;
     }
 
 
@@ -13394,9 +26155,32 @@ function get_wpme_order_lead_id($genoo_id)
 
 
 
-    return $order !== false ? $order->user_lid : false;
 
+
+
+
+
+
+
+
+    return $order !== false ? $order->user_lid : false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13420,7 +26204,23 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
+
+
+
+
+
+
+
+
 {
+
+
+
+
+
+
+
+
 
 
 
@@ -13436,9 +26236,24 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -13454,7 +26269,23 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
+
+
+
+
+
+
+
+
     $subscription = wc_get_order($subscription_id); // Or: new WC_Subscription($subscription_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -13470,9 +26301,32 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13496,7 +26350,23 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
+
+
+
+
+
+
+
+
     foreach ($subscription->get_items() as $item_id => $product_subscription) {
+
+
+
+
+
+
+
+
 
 
 
@@ -13512,8 +26382,15 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
-        $return[] = $product_subscription->get_name();
 
+
+
+
+
+
+
+
+        $return[] = $product_subscription->get_name();
     }
 
 
@@ -13522,9 +26399,32 @@ function get_wpme_subscription_activity_name($subscription_id)
 
 
 
-    return $return;
 
+
+
+
+
+
+
+
+    return $return;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13548,7 +26448,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     // Get API
+
+
+
+
+
+
+
+
 
 
 
@@ -13564,7 +26480,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     // Genoo order ID
+
+
+
+
+
+
+
+
 
 
 
@@ -13580,7 +26512,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     $getrenewal = get_post_meta($order_id, '_subscription_renewal', true);
+
+
+
+
+
+
+
+
 
 
 
@@ -13596,7 +26544,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
         $subscriptions_ids = wcs_get_subscriptions_for_order($order_id, array(
+
+
+
+
+
+
+
+
 
 
 
@@ -13612,6 +26576,14 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
         ));
 
 
@@ -13620,7 +26592,31 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     endif;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13644,7 +26640,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
         if (isset($WPME_API) && !empty($id)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -13660,7 +26672,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder = new \WPME\Ecommerce\CartOrder($id);
+
+
+
+
+
+
+
+
 
 
 
@@ -13676,6 +26704,14 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             // Total price
 
 
@@ -13684,7 +26720,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -13700,7 +26752,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -13716,7 +26784,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             // Completed?
+
+
+
+
+
+
+
+
 
 
 
@@ -13732,7 +26816,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->order_status = 'subpayment';
+
+
+
+
+
+
+
+
 
 
 
@@ -13742,7 +26842,17 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
                 $cartOrder->changed->order_status = 'subpayment';
 
+
+
             else :
+
+
+
+
+
+
+
+
 
 
 
@@ -13758,7 +26868,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->changed->order_status = 'order';
+
+
+
+
+
+
+
+
 
 
 
@@ -13774,7 +26900,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->financial_status = 'paid';
+
+
+
+
+
+
+
+
 
 
 
@@ -13790,7 +26932,23 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrderEmail = WPME\WooCommerce\Helper::getEmailFromOrder($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -13806,6 +26964,14 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->email_ordered_from = $cartOrderEmail;
 
 
@@ -13814,9 +26980,24 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
-                $cartOrder->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                $cartOrder->changed->email_ordered_from = $cartOrderEmail;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -13832,6 +27013,14 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $WPME_API->updateCart($cartOrder->id, (array)$cartOrder->getPayload());
 
 
@@ -13840,9 +27029,24 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
-                wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+                wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
             } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -13858,10 +27062,16 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('FAILED to updated order to PROCESSING :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
             }
-
         }
 
 
@@ -13870,9 +27080,40 @@ add_action('woocommerce_order_status_processing', function ($order_id) {
 
 
 
-    endif;
 
+
+
+
+
+
+
+
+    endif;
 }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13904,7 +27145,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -13920,7 +27177,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $id = get_post_meta($subscription->id, WPMKTENGINE_ORDER_KEY, true);
+
+
+
+
+
+
+
+
 
 
 
@@ -13936,7 +27209,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -13952,9 +27241,32 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13978,7 +27290,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $is_renewal = get_post_meta($order->id, '_subscription_renewal_order_ids_cache', true);
+
+
+
+
+
+
+
+
 
 
 
@@ -13994,7 +27322,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
         //subscription started
+
+
+
+
+
+
+
+
 
 
 
@@ -14010,7 +27354,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name_values = implode("," . " ", $subscription_product_name);
+
+
+
+
+
+
+
+
 
 
 
@@ -14026,7 +27386,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $genoo_lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -14042,7 +27418,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $subscription_product_name_values, // Title  $order->parent_id
+
+
+
+
+
+
+
+
 
 
 
@@ -14058,6 +27450,14 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             ' '
 
 
@@ -14066,7 +27466,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             // Permalink
+
+
+
+
+
+
+
+
 
 
 
@@ -14090,7 +27506,31 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (isset($WPME_API) && !empty($id)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14106,7 +27546,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartAddress = $order->get_address('billing');
+
+
+
+
+
+
+
+
 
 
 
@@ -14122,7 +27578,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder = new \WPME\Ecommerce\CartOrder($order_genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -14138,7 +27610,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -14154,7 +27642,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -14170,7 +27674,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -14186,7 +27706,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -14202,7 +27738,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 '',
+
+
+
+
+
+
+
+
 
 
 
@@ -14218,7 +27770,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             );
+
+
+
+
+
+
+
+
 
 
 
@@ -14234,7 +27802,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress2['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -14250,7 +27834,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress2['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -14266,7 +27866,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress2['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -14282,7 +27898,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 '',
+
+
+
+
+
+
+
+
 
 
 
@@ -14298,7 +27930,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             );
+
+
+
+
+
+
+
+
 
 
 
@@ -14314,7 +27962,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->currency = $order->get_order_currency();
+
+
+
+
+
+
+
+
 
 
 
@@ -14330,7 +27994,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             // Add email and leadType
+
+
+
+
+
+
+
+
 
 
 
@@ -14346,7 +28026,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->ec_lead_type_id = wpme_get_customer_lead_type();
+
+
+
+
+
+
+
+
 
 
 
@@ -14362,7 +28058,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->email_ordered_from = $email;
+
+
+
+
+
+
+
+
 
 
 
@@ -14378,7 +28090,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->tax_amount = $order->get_total_tax();
+
+
+
+
+
+
+
+
 
 
 
@@ -14394,7 +28122,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -14410,7 +28154,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -14426,7 +28186,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             // Completed?
+
+
+
+
+
+
+
+
 
 
 
@@ -14442,7 +28218,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->changed->order_status = 'subpayment';
+
+
+
+
+
+
+
+
 
 
 
@@ -14458,7 +28250,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $cartOrderEmail = WPME\WooCommerce\Helper::getEmailFromOrder($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -14474,7 +28282,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->email_ordered_from = $cartOrderEmail;
+
+
+
+
+
+
+
+
 
 
 
@@ -14490,7 +28314,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 if (!is_null($leadNew) && $leadNew > 0) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14506,7 +28346,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                     $lead_id = $leadNew;
+
+
+
+
+
+
+
+
 
 
 
@@ -14522,6 +28378,14 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                     \WPME\Helper::setUserCookie($lead_id);
 
 
@@ -14530,11 +28394,25 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 Created NEW LEAD for EMAIL :' . $email . ' : LEAD ID ' . $lead_id);
-
                 }
-
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -14550,7 +28428,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->order_status = 'subpayment';
+
+
+
+
+
+
+
+
 
 
 
@@ -14566,6 +28460,14 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 $WPME_API->updateCart($cartOrder->id, (array)$cartOrder->getPayload());
 
 
@@ -14574,9 +28476,24 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
-                wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $subscription->id);
 
+
+
+
+
+
+
+
+                wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $subscription->id);
             } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14592,10 +28509,16 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('FAILED to updated order to PROCESSING :' . $id . ' : WOO ID : ' . $subscription->id . ' : Because : ' . $e->getMessage());
-
             }
-
         }
 
 
@@ -14604,9 +28527,32 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
-    endif;
 
+
+
+
+
+
+
+
+    endif;
 }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14630,7 +28576,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
  * Order Completed
+
+
+
+
+
+
+
+
 
 
 
@@ -14646,7 +28608,23 @@ add_action('woocommerce_subscription_payment_complete', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action('woocommerce_order_status_completed', function ($order_id) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14662,7 +28640,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     global $WPME_API;
+
+
+
+
+
+
+
+
 
 
 
@@ -14678,7 +28672,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     if (function_exists('wcs_get_subscriptions_for_order')) :
+
+
+
+
+
+
+
+
 
 
 
@@ -14694,7 +28704,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             'order_type' => 'any'
+
+
+
+
+
+
+
+
 
 
 
@@ -14710,7 +28736,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
     endif;
+
+
+
+
+
+
+
+
 
 
 
@@ -14726,7 +28768,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
         $id = get_post_meta($order_id, WPMKTENGINE_ORDER_KEY, true);
+
+
+
+
+
+
+
+
 
 
 
@@ -14742,7 +28800,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
         $order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -14758,7 +28832,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder = new \WPME\Ecommerce\CartOrder($id);
+
+
+
+
+
+
+
+
 
 
 
@@ -14774,7 +28864,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->actionOrderFullfillment();
+
+
+
+
+
+
+
+
 
 
 
@@ -14790,7 +28896,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -14806,7 +28928,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -14822,7 +28960,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             // Completed?
+
+
+
+
+
+
+
+
 
 
 
@@ -14838,7 +28992,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->changed->completed_date = \WPME\Ecommerce\Utils::getDateTime();
+
+
+
+
+
+
+
+
 
 
 
@@ -14854,7 +29024,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->order_status = 'completed';
+
+
+
+
+
+
+
+
 
 
 
@@ -14870,7 +29056,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -14886,7 +29088,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             if ($cartOrderEmail !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14902,9 +29120,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                $cartOrder->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                $cartOrder->changed->email_ordered_from = $cartOrderEmail;
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -14920,6 +29153,14 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $result = $WPME_API->updateCart($cartOrder->id, (array)$cartOrder->getPayload());
 
 
@@ -14928,9 +29169,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                wpme_simple_log_2('UPDATED ORDER to COMPLETED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
 
+
+
+
+
+
+
+
+                wpme_simple_log_2('UPDATED ORDER to COMPLETED :' . $cartOrder->id . ' : WOO ID : ' . $order_id);
             } catch (\Exception $e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14946,11 +29202,25 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('FAILED to updated order to COMPLETED :' . $id . ' : WOO ID : ' . $order_id . ' : Because : ' . $e->getMessage());
-
             }
-
         } elseif (isset($WPME_API)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14966,7 +29236,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             wpme_simple_log_2('WCUOM-2B-1 New order from cart.');
+
+
+
+
+
+
+
+
 
 
 
@@ -14982,7 +29268,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             // and firstly, creat a lead.
+
+
+
+
+
+
+
+
 
 
 
@@ -14998,7 +29300,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             // Do we have an email?
+
+
+
+
+
+
+
+
 
 
 
@@ -15014,7 +29332,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             $email = $order->get_billing_email();
+
+
+
+
+
+
+
+
 
 
 
@@ -15030,7 +29364,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
             if ($email !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -15046,7 +29396,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 // Get order & adresses
+
+
+
+
+
+
+
+
 
 
 
@@ -15062,7 +29428,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 @$order = new \WC_Order($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -15078,7 +29460,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $cartAddress2 = $order->get_address('shipping');
+
+
+
+
+
+
+
+
 
 
 
@@ -15094,7 +29492,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 @$lead_last = isset($data['billing_last_name']) ? $data['billing_last_name'] : null;
+
+
+
+
+
+
+
+
 
 
 
@@ -15110,7 +29524,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     // If both are empty, try from order?
+
+
+
+
+
+
+
+
 
 
 
@@ -15126,7 +29556,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     @$lead_last = $cartAddress['last_name'];
+
+
+
+
+
+
+
+
 
 
 
@@ -15142,6 +29588,14 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     if (empty($lead_first) && empty($lead_last)) {
 
 
@@ -15150,7 +29604,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         // If both are empty
+
+
+
+
+
+
+
+
 
 
 
@@ -15166,9 +29636,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                        @$lead_last = $cartAddress2['last_name'];
 
+
+
+
+
+
+
+
+                        @$lead_last = $cartAddress2['last_name'];
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -15184,7 +29669,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         // If both are empty
+
+
+
+
+
+
+
+
 
 
 
@@ -15200,9 +29701,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                        @$lead_last = isset($data['shipping_last_name']) ? $data['shipping_last_name'] : null;
 
+
+
+
+
+
+
+
+                        @$lead_last = isset($data['shipping_last_name']) ? $data['shipping_last_name'] : null;
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -15218,7 +29734,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         // If both are empty
+
+
+
+
+
+
+
+
 
 
 
@@ -15234,11 +29766,25 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         @$lead_last = wpme_get_last_name_from_request();
-
                     }
-
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -15254,7 +29800,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WCUOM-2B-2A-3 Lead info to be created: ' . print_r(array($lead_first, $lead_last, $cartAddress, $cartAddress2), true));
+
+
+
+
+
+
+
+
 
 
 
@@ -15270,7 +29832,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 $lead_id = null;
+
+
+
+
+
+
+
+
 
 
 
@@ -15286,7 +29864,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-3A-1 Trying to get lead by email.');
+
+
+
+
+
+
+
+
 
 
 
@@ -15302,7 +29896,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     // NO lead, create one
+
+
+
+
+
+
+
+
 
 
 
@@ -15318,7 +29928,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-3A-1B-2 Creating one, leadtype: ' . $leadTypeFirst);
+
+
+
+
+
+
+
+
 
 
 
@@ -15334,6 +29960,14 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     if ($leadTypeFirst !== false && !is_null($leadTypeFirst) && is_numeric($leadTypeFirst)) {
 
 
@@ -15342,9 +29976,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                        $leadType = $leadTypeFirst;
 
+
+
+
+
+
+
+
+                        $leadType = $leadTypeFirst;
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -15360,7 +30009,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         'genoo_wpme_lead_creation_attributes',
+
+
+
+
+
+
+
+
 
 
 
@@ -15376,7 +30041,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                             'organization' => '',
+
+
+
+
+
+
+
+
 
 
 
@@ -15392,7 +30073,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                             'address2' => $cartAddress['address_2'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15408,7 +30105,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                             'country' => $cartAddress['country'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15424,7 +30137,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                             'mobilephone' => $cartAddress['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15440,7 +30169,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15456,7 +30201,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -15472,7 +30233,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-3A-1B-2B Lead Attributes after filter: ' . print_r($attributes, true));
+
+
+
+
+
+
+
+
 
 
 
@@ -15488,7 +30265,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         (int)$leadType,
+
+
+
+
+
+
+
+
 
 
 
@@ -15504,7 +30297,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $lead_first,
+
+
+
+
+
+
+
+
 
 
 
@@ -15520,7 +30329,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         '',
+
+
+
+
+
+
+
+
 
 
 
@@ -15536,6 +30361,14 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $attributes
 
 
@@ -15544,7 +30377,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -15560,7 +30409,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $leadNew = (int)$leadNew;
+
+
+
+
+
+
+
+
 
 
 
@@ -15576,9 +30441,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                        clearRefferalFromSession();
 
+
+
+
+
+
+
+
+                        clearRefferalFromSession();
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -15594,7 +30474,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         // We have a lead id
+
+
+
+
+
+
+
+
 
 
 
@@ -15610,7 +30506,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         // Set cookie
+
+
+
+
+
+
+
+
 
 
 
@@ -15626,9 +30538,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                        wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 Created NEW LEAD for EMAIL :' . $email . ' : LEAD ID ' . $lead_id);
 
+
+
+
+
+
+
+
+                        wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 Created NEW LEAD for EMAIL :' . $email . ' : LEAD ID ' . $lead_id);
                     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -15644,6 +30571,14 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2('WCUOM-2B-2A-3A-1B-3A-1 response:');
 
 
@@ -15652,10 +30587,16 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         wpme_simple_log_2($WPME_API->http->response['body']);
-
                     }
-
                 } catch (\Exception $e) {
 
 
@@ -15664,9 +30605,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                    wpme_simple_log_2('WCUOM-2B-2A-3B-1 Error GETTING or CREATING lead by EMAIL :' . $email . ' : ' . $e->getMessage());
 
+
+
+
+
+
+
+
+                    wpme_simple_log_2('WCUOM-2B-2A-3B-1 Error GETTING or CREATING lead by EMAIL :' . $email . ' : ' . $e->getMessage());
                 }
+
+
+
+
+
+
+
+
 
 
 
@@ -15682,7 +30638,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 // 2.1 Set to new order
+
+
+
+
+
+
+
+
 
 
 
@@ -15698,7 +30670,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-4-1 Lead exists, creating order. lead id: ' . $lead_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -15714,7 +30702,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartContents = \WPME\WooCommerce\VariantCart::convertCartToObject($cart->cart_contents);
+
+
+
+
+
+
+
+
 
 
 
@@ -15730,7 +30734,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
 
 
 
@@ -15746,7 +30766,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->actionNewOrder();
+
+
+
+
+
+
+
+
 
 
 
@@ -15762,7 +30798,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartAddress['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15778,7 +30830,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartAddress['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15794,7 +30862,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartAddress['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15810,7 +30894,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         '',
+
+
+
+
+
+
+
+
 
 
 
@@ -15826,7 +30926,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -15842,7 +30958,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartAddress2['address_1'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15858,7 +30990,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartAddress2['city'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15874,7 +31022,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartAddress2['phone'],
+
+
+
+
+
+
+
+
 
 
 
@@ -15890,7 +31054,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         '',
+
+
+
+
+
+
+
+
 
 
 
@@ -15906,7 +31086,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     );
+
+
+
+
+
+
+
+
 
 
 
@@ -15922,7 +31118,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->currency = $order->get_order_currency();
+
+
+
+
+
+
+
+
 
 
 
@@ -15938,7 +31150,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->addItemsArray($cartContents);
+
+
+
+
+
+
+
+
 
 
 
@@ -15954,7 +31182,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $leadTYpe = wpme_get_customer_lead_type();
+
+
+
+
+
+
+
+
 
 
 
@@ -15970,7 +31214,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->changed->ec_lead_type_id = $leadTYpe;
+
+
+
+
+
+
+
+
 
 
 
@@ -15986,7 +31246,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->changed->email_ordered_from = $email;
+
+
+
+
+
+
+
+
 
 
 
@@ -16002,7 +31278,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->changed->tax_amount = $order->get_total_tax();
+
+
+
+
+
+
+
+
 
 
 
@@ -16018,7 +31310,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrder->changed->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -16034,7 +31342,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     $cartOrderEmail = \WPME\WooCommerce\Helper::getEmailFromOrder($order_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -16050,6 +31374,14 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                         $cartOrder->email_ordered_from = $cartOrderEmail;
 
 
@@ -16058,9 +31390,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                        $cartOrder->changed->email_ordered_from = $cartOrderEmail;
 
+
+
+
+
+
+
+
+                        $cartOrder->changed->email_ordered_from = $cartOrderEmail;
                     }
+
+
+
+
+
+
+
+
 
 
 
@@ -16076,7 +31423,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     // Continue
+
+
+
+
+
+
+
+
 
 
 
@@ -16092,7 +31455,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     // Set order meta
+
+
+
+
+
+
+
+
 
 
 
@@ -16108,7 +31487,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     // Remove session id
+
+
+
+
+
+
+
+
 
 
 
@@ -16124,7 +31519,23 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     // Log
+
+
+
+
+
+
+
+
 
 
 
@@ -16140,9 +31551,24 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-                    wpme_simple_log_2('WCUOM-2B-2A-4-3 Finished ORDER, WooCommerce ID:' . $order_id);
 
+
+
+
+
+
+
+
+                    wpme_simple_log_2('WCUOM-2B-2A-4-3 Finished ORDER, WooCommerce ID:' . $order_id);
                 } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -16158,10 +31584,16 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                     wpme_simple_log_2('WCUOM-2B-2A-5-2 Last API response: ' . print_r($WPME_API->http, true));
-
                 }
-
             } else {
 
 
@@ -16170,10 +31602,16 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
                 wpme_simple_log_2('WCUOM-2B-2B-1 No email for order, can\'t continue');
-
             }
-
         }
 
 
@@ -16182,9 +31620,40 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
-    endif;
 
+
+
+
+
+
+
+
+    endif;
 }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16216,7 +31685,31 @@ add_action('woocommerce_order_status_completed', function ($order_id) {
 
 
 
+
+
+
+
+
+
+
+
 add_action("woocommerce_subscription_status_on-hold_to_active", "on_reactive", 10, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16240,6 +31733,14 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
 {
 
 
@@ -16248,7 +31749,31 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
     if ($subscription->suspension_count != 0) :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16280,6 +31805,22 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (!$genoo_id) {
 
 
@@ -16288,9 +31829,32 @@ function on_reactive($subscription)
 
 
 
-            return;
 
+
+
+
+
+
+
+
+            return;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16322,7 +31886,39 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16346,9 +31942,32 @@ function on_reactive($subscription)
 
 
 
-            return;
 
+
+
+
+
+
+
+
+            return;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16372,6 +31991,14 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
         //subscription reactivated
 
 
@@ -16380,7 +32007,23 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name = get_wpme_subscription_activity_name($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -16404,7 +32047,31 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -16420,7 +32087,23 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
             'subscription reactivated',
+
+
+
+
+
+
+
+
 
 
 
@@ -16436,7 +32119,23 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $subscription_product_name_values, // Content
+
+
+
+
+
+
+
+
 
 
 
@@ -16452,7 +32151,23 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
             // Permalink
+
+
+
+
+
+
+
+
 
 
 
@@ -16476,9 +32191,40 @@ function on_reactive($subscription)
 
 
 
-    endif;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    endif;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16502,7 +32248,31 @@ function on_reactive($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action("woocommerce_subscription_status_pending-cancel_to_active", "pending_cancel", 10, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16526,7 +32296,23 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
 {
+
+
+
+
+
+
+
+
 
 
 
@@ -16542,6 +32328,14 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
     if (!$genoo_id) {
 
 
@@ -16550,9 +32344,24 @@ function pending_cancel($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -16568,7 +32377,23 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -16584,9 +32409,24 @@ function pending_cancel($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -16602,7 +32442,23 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $subscription_product_name = get_wpme_subscription_activity_name($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -16618,7 +32474,23 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
     wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -16634,7 +32506,23 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
         'subscription reactivated',
+
+
+
+
+
+
+
+
 
 
 
@@ -16650,7 +32538,23 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name_values, // Content
+
+
+
+
+
+
+
+
 
 
 
@@ -16666,6 +32570,14 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
         // Permalink
 
 
@@ -16674,9 +32586,32 @@ function pending_cancel($subscription)
 
 
 
-    );
 
+
+
+
+
+
+
+
+    );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16700,7 +32635,31 @@ function pending_cancel($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action("woocommerce_subscription_status_on-hold", "on_hold_subscription", 10, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16724,6 +32683,14 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
 {
 
 
@@ -16732,7 +32699,31 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $user = wp_get_current_user();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16764,7 +32755,39 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $user_roles = $user->roles;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16796,7 +32819,39 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $order = new \WC_Order($subscription->id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16820,9 +32875,24 @@ function on_hold_subscription($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -16838,7 +32908,23 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -16854,9 +32940,24 @@ function on_hold_subscription($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -16872,7 +32973,23 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $subscription_product_name = get_wpme_subscription_activity_name($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -16888,7 +33005,23 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     if (in_array('administrator', $user_roles)) :
+
+
+
+
+
+
+
+
 
 
 
@@ -16904,7 +33037,23 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $genoo_lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -16920,7 +33069,23 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
             $subscription_product_name_values, // Title
+
+
+
+
+
+
+
+
 
 
 
@@ -16936,6 +33101,14 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
             ' '
 
 
@@ -16944,7 +33117,23 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
             // Permalink
+
+
+
+
+
+
+
+
 
 
 
@@ -16968,9 +33157,40 @@ function on_hold_subscription($subscription)
 
 
 
-    endif;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    endif;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16994,7 +33214,31 @@ function on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action("woocommerce_customer_changed_subscription_to_on-hold", "customer_on_hold_subscription", 10, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17018,6 +33262,14 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
 {
 
 
@@ -17026,7 +33278,23 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_id = get_wpme_order_from_woo_order($subscription);
+
+
+
+
+
+
+
+
 
 
 
@@ -17050,6 +33318,22 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (!$genoo_id) {
 
 
@@ -17058,9 +33342,24 @@ function customer_on_hold_subscription($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17076,7 +33375,23 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17092,9 +33407,24 @@ function customer_on_hold_subscription($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17118,7 +33448,31 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $subscription_product_name = get_wpme_subscription_activity_name($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17142,7 +33496,31 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -17158,7 +33536,23 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         'subscription on hold',
+
+
+
+
+
+
+
+
 
 
 
@@ -17174,7 +33568,23 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name_values, // Content
+
+
+
+
+
+
+
+
 
 
 
@@ -17190,6 +33600,14 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         // Permalink
 
 
@@ -17198,9 +33616,32 @@ function customer_on_hold_subscription($subscription)
 
 
 
-    );
 
+
+
+
+
+
+
+
+    );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17224,7 +33665,23 @@ function customer_on_hold_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action('woocommerce_subscription_status_cancelled', function ($subscription) {
+
+
+
+
+
+
+
+
 
 
 
@@ -17240,7 +33697,23 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_id = get_wpme_order_from_woo_order($subscription);
+
+
+
+
+
+
+
+
 
 
 
@@ -17256,6 +33729,14 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     if (!$genoo_id) {
 
 
@@ -17264,9 +33745,24 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17282,7 +33778,23 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17298,9 +33810,24 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17316,7 +33843,23 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $subscription_product_name = get_wpme_subscription_activity_name($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17332,7 +33875,23 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
     wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -17348,7 +33907,23 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
         'subscription cancelled',
+
+
+
+
+
+
+
+
 
 
 
@@ -17364,7 +33939,23 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name_values, // Content
+
+
+
+
+
+
+
+
 
 
 
@@ -17380,6 +33971,14 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
         // Permalink
 
 
@@ -17388,9 +33987,32 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
-    );
 
+
+
+
+
+
+
+
+    );
 }, 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17414,7 +34036,31 @@ add_action('woocommerce_subscription_status_cancelled', function ($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action('woocommerce_subscription_status_pending-cancel', 'pending_cancel_subscription', 10, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17438,6 +34084,14 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
 {
 
 
@@ -17446,7 +34100,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $order = new \WC_Order($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17462,7 +34132,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_id = get_wpme_order_from_woo_order($subscription);
+
+
+
+
+
+
+
+
 
 
 
@@ -17478,6 +34164,14 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     if (!$genoo_id) {
 
 
@@ -17486,9 +34180,24 @@ function pending_cancel_subscription($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17504,7 +34213,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17520,9 +34245,24 @@ function pending_cancel_subscription($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17538,7 +34278,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $subscription_product_name = get_wpme_subscription_activity_name($subscription->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17562,7 +34318,31 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     wpme_fire_activity_stream(
+
+
+
+
+
+
+
+
 
 
 
@@ -17578,7 +34358,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         'Subscription Pending Cancellation',
+
+
+
+
+
+
+
+
 
 
 
@@ -17594,7 +34390,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name_values, // Title
+
+
+
+
+
+
+
+
 
 
 
@@ -17610,6 +34422,14 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         ' '
 
 
@@ -17618,6 +34438,14 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         // Permalink
 
 
@@ -17626,7 +34454,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
         // Permalink
+
+
+
+
+
+
+
+
 
 
 
@@ -17635,8 +34479,23 @@ function pending_cancel_subscription($subscription)
 
 
     );
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17660,7 +34519,23 @@ function pending_cancel_subscription($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action('woocommerce_subscription_status_expired', 'my_on_subscription_expired', 10);
+
+
+
+
+
+
+
+
 
 
 
@@ -17676,6 +34551,14 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
 {
 
 
@@ -17684,7 +34567,31 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $order = new \WC_Order($subscription->id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17716,6 +34623,22 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (!$genoo_id) {
 
 
@@ -17724,9 +34647,32 @@ function my_on_subscription_expired($subscription)
 
 
 
-        return;
 
+
+
+
+
+
+
+
+        return;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17758,7 +34704,39 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $genoo_lead_id = get_wpme_order_lead_id($genoo_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17782,7 +34760,31 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
     $subscription_product_name_values = implode("," . " ", $subscription_product_name);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17806,7 +34808,23 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $genoo_lead_id,
+
+
+
+
+
+
+
+
 
 
 
@@ -17822,7 +34840,23 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
         $subscription_product_name_values, // Title
+
+
+
+
+
+
+
+
 
 
 
@@ -17838,7 +34872,23 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
         ' '
+
+
+
+
+
+
+
+
 
 
 
@@ -17854,9 +34904,24 @@ function my_on_subscription_expired($subscription)
 
 
 
-    );
 
+
+
+
+
+
+
+
+    );
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -17872,7 +34937,23 @@ function my_on_subscription_expired($subscription)
 
 
 
+
+
+
+
+
+
+
+
 add_action('woocommerce_subscription_renewal_payment_complete', function ($subscription, $order) {
+
+
+
+
+
+
+
+
 
 
 
@@ -17888,7 +34969,31 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
     $manual = get_post_meta($subscription->id, '_requires_manual_renewal', true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17920,7 +35025,39 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $id = get_post_meta($order->id, WPMKTENGINE_ORDER_KEY, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17944,7 +35081,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $order = new \WC_Order($order->id);
+
+
+
+
+
+
+
+
 
 
 
@@ -17960,7 +35113,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartAddress2 = $order->get_address('shipping');
+
+
+
+
+
+
+
+
 
 
 
@@ -17976,7 +35145,31 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->setApi($WPME_API);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -18008,7 +35201,31 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             foreach ($get_order->get_items() as $item) {
+
+
+
+
+
+
+
+
 
 
 
@@ -18024,7 +35241,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                 // Let's see if this is in
+
+
+
+
+
+
+
+
 
 
 
@@ -18040,7 +35273,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                 if (is_numeric($id) && $id > 0) {
+
+
+
+
+
+
+
+
 
 
 
@@ -18056,7 +35305,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                     $array['quantity'] = $changedItemData['quantity'];
+
+
+
+
+
+
+
+
 
 
 
@@ -18072,7 +35337,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                     $array['unit_price'] = $changedItemData['total'] / $changedItemData['quantity'];
+
+
+
+
+
+
+
+
 
 
 
@@ -18088,6 +35369,14 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                     $array['name'] = $changedItemData['name'];
 
 
@@ -18096,11 +35385,33 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                     $wpmeApiOrderItems[] = $array;
-
                 }
-
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -18124,7 +35435,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->setShippingAddress($cartAddress['address_1'], $cartAddress['address_2'], $cartAddress['city'], $cartAddress['country'], $cartAddress['phone'], $cartAddress['postcode'], '', $cartAddress['state']);
+
+
+
+
+
+
+
+
 
 
 
@@ -18140,7 +35467,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->total_price = $order->get_total();
+
+
+
+
+
+
+
+
 
 
 
@@ -18156,7 +35499,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->shipping_amount = $order->get_total_shipping();
+
+
+
+
+
+
+
+
 
 
 
@@ -18172,7 +35531,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->changed->order_status = 'subrenewal';
+
+
+
+
+
+
+
+
 
 
 
@@ -18188,7 +35563,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->action = 'subscription Renewal';
+
+
+
+
+
+
+
+
 
 
 
@@ -18204,7 +35595,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             $cartOrder->addItemsArray($wpmeApiOrderItems);
+
+
+
+
+
+
+
+
 
 
 
@@ -18220,7 +35627,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             // From email
+
+
+
+
+
+
+
+
 
 
 
@@ -18236,7 +35659,23 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
             if ($cartOrderEmail !== false) {
+
+
+
+
+
+
+
+
 
 
 
@@ -18252,12 +35691,16 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
+
+
+
+
+
+
+
+
                 $cartOrder->changed->email_ordered_from = $cartOrderEmail;
-
             }
-
-
-
 
 
 
@@ -18266,40 +35709,19 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
-
-
-
-
                 $WPME_API->updateCart($cartOrder->id, (array)$cartOrder->getPayload());
 
 
 
-
-
-
-
                 wpme_simple_log_2('UPDATED ORDER to PROCESSING :' . $cartOrder->id . ' : WOO ID : ' . $order->id);
-
             } catch (\Exception $e) {
-
-
-
-
-
 
 
                 wpme_simple_log_2('Processing ORDER, Genoo ID:' . $cartOrder->id);
 
 
-
-
-
-
-
                 wpme_simple_log_2('FAILED to updated order to PROCESSING :' . $id . ' : WOO ID : ' . $order->id . ' : Because : ' . $e->getMessage());
-
             }
-
         }
 
 
@@ -18308,9 +35730,24 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 
 
-    endif;
 
+
+
+
+
+
+
+
+    endif;
 }, 10, 2);
+
+
+
+
+
+
+
+
 
 
 
@@ -18320,33 +35757,29 @@ add_action('woocommerce_subscription_renewal_payment_complete', function ($subsc
 
 //update the hook for create new field in database addon table.     
 
+
+
 add_action('upgrader_process_complete', function ($upgrader_object, $options) {
 
+    $our_plugin = plugin_basename(__FILE__);
+
+    $is_plugin_updated = false;
+
+    //check plugin is active
+
+    if (isset($options['plugins']) && is_array($options['plugins'])) {
+        foreach ($options['plugins'] as $index => $plugin) {
+            if ($our_plugin === $plugin) {
+                $is_plugin_updated = true;
+                break;
+            }
+        }
+    }
+
+    if (!$is_plugin_updated) {
+        return;
+    }
+    // custom__logs('ccccccccccccccc');
 
 
-    custom__logs('ccccccccccccccc');
-
-  
-
-},10, 2);
-
-
-
-
-
-function custom_logs($message) { 
-
-    if(is_array($message)) { 
-
-        $message = json_encode($message); 
-
-    } 
-
-    $file = fopen("../custom_logs.log","a"); 
-
-    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message); 
-
-    fclose($file); 
-
-}
-
+}, 10, 2);
