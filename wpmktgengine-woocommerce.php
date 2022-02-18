@@ -5,7 +5,7 @@ Description: Genoo, LLC
 Author:  Genoo, LLC
 Author URI: http://www.genoo.com/
 Author Email: info@genoo.com
-Version: 1.7.45
+Version: 1.7.46
 License: GPLv2
 WC requires at least: 3.0.0
 WC tested up to: 5.2.3
