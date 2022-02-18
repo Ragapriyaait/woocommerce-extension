@@ -5,7 +5,7 @@ Description: Genoo, LLC
 Author:  Genoo, LLC
 Author URI: http://www.genoo.com/
 Author Email: info@genoo.com
-Version: 1.7.44
+Version: 1.7.45
 License: GPLv2
 WC requires at least: 3.0.0
 WC tested up to: 5.2.3
@@ -4766,10 +4766,6 @@ add_action(
             return;
         }
 
-        $repo = new \Genoo\RepositorySettings();
-
-        $api = new \Genoo\Api($repo);
-
         //check plugin is active
         if (isset($options['plugins']) && is_array($options['plugins'])) {
             foreach ($options['plugins'] as $index => $plugin) {
@@ -4779,6 +4775,9 @@ add_action(
                 }
             }
         }
+        $repo = new \Genoo\RepositorySettings();
+
+        $api = new \Genoo\Api($repo);
 
         $fileFolder = basename(dirname(__FILE__));
 
