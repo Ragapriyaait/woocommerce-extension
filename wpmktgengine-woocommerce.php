@@ -88,7 +88,7 @@
 
 
 
-    Version: 1.7.39
+    Version: 1.7.40
 
 
 
@@ -5219,6 +5219,10 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) us
 
     $is_plugin_updated = false;
 
+    $repo = new \Genoo\RepositorySettings();
+
+    $api = new \Genoo\Api($repo);
+
     //check plugin is active
     if (isset($options['plugins']) && is_array($options['plugins']))
     {
@@ -5240,7 +5244,7 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) us
     try
     {
 
-        $WPME_API->setStreamTypes(array(
+        $api->setStreamTypes(array(
 
             array(
 
