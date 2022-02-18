@@ -12,7 +12,7 @@
 
     Author Email: info@genoo.com
 
-    Version: 1.7.55
+    Version: 1.7.56
 
     License: GPLv2
 
@@ -4887,35 +4887,33 @@ add_action(
 );
 //update the hook for create new field in database addon table.
 
-add_action('upgrader_process_complete', 'lead_folder_field_creation1', 10, 2);
-
-function lead_folder_field_creation1($upgrader_object, $options)
+/**
+ * This function runs when WordPress completes its upgrade process
+ * It iterates through each plugin updated to see if ours is included
+ * @param $upgrader_object Array
+ * @param $options Array
+ */
+function wp_upe_upgrade_completed($upgrader_object, $options)
 {
-    global $wpdb;
-
-    //get plugin file.
-
+    // The path to our plugin's main file
     $our_plugin = plugin_basename(__FILE__);
+    // If an update has taken place and the updated type is plugins and the plugins element exists
+    if (
+        $options['action'] == 'update' &&
+        $options['type'] == 'plugin' &&
+        isset($options['plugins'])
+    ) {
+        // Iterate through the plugins being updated and check if ours is there
+        foreach ($options['plugins'] as $plugin) {
+            if ($plugin == $our_plugin) {
+                // Your action if it is your plugin
 
-    $is_plugin_updated = false;
-
-    //check plugin is active
-
-    if (isset($options['plugins']) && is_array($options['plugins'])) {
-        foreach ($options['plugins'] as $index => $plugin) {
-            if ($our_plugin === $plugin) {
-                $is_plugin_updated = true;
-                break;
+                custom_logs('ddddddddddddddddd');
             }
         }
     }
-
-    if (!$is_plugin_updated) {
-        return;
-    }
-    custom_logs('ssssssssss');
 }
-
+add_action('upgrader_process_complete', 'wp_upe_upgrade_completed', 10, 2);
 function custom_logs($message)
 {
     if (is_array($message)) {
