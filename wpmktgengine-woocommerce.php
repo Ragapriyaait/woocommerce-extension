@@ -12,7 +12,7 @@
 
     Author Email: info@genoo.com
 
-    Version: 1.7.54
+    Version: 1.7.55
 
     License: GPLv2
 
@@ -4887,9 +4887,9 @@ add_action(
 );
 //update the hook for create new field in database addon table.
 
-add_action('upgrader_process_complete', 'lead_folder_field_creation', 10, 2);
+add_action('upgrader_process_complete', 'lead_folder_field_creation1', 10, 2);
 
-function lead_folder_field_creation($upgrader_object, $options)
+function lead_folder_field_creation1($upgrader_object, $options)
 {
     global $wpdb;
 
