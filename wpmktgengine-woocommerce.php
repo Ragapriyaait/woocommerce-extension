@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.79
+    Version: 1.7.80
 
 
 
@@ -6120,16 +6120,30 @@ add_action(
 
     2
 );
+add_action('upgrader_process_complete', 'de_upgrader_process_complete', 10, 2);
 
-add_filter(
-    'upgrader_post_install',
-    function ($response, $hook_extra, $result) use ($file) {
-        custom_logs('ddddddddddddddddddddddd');
+function de_upgrader_process_complete($upgrader_object, $options)
+{
+    $shipstation_updated = false;
+
+    if (isset($options['plugins']) && is_array($options['plugins'])) {
+        foreach ($options['plugins'] as $index => $plugin) {
+            if (
+                'woocommerce-extension/wpmktgengine-woocommerce.php' === $plugin
+            ) {
+                $shipstation_updated = true;
+                custom_logs('ccasasass');
+                break;
+            }
+        }
+    }
+
+    if (!$shipstation_updated) {
         return;
-    },
-    10,
-    3
-);
+    }
+
+    // Do something when ShipStation plugin has been updated.
+}
 function custom_logs($message)
 {
     if (is_array($message)) {
