@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.67
+    Version: 1.7.68
 
 
 
@@ -6150,49 +6150,49 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
         $options['type'] == 'plugin' &&
         isset($options['plugins'])
     ) {
+        $activate = false;
+
+        $isGenoo = false;
+
+        // Get api / repo
+
+        if (
+            class_exists('\WPME\ApiFactory') &&
+            class_exists('\WPME\RepositorySettingsFactory')
+        ) {
+            $activate = true;
+
+            $repo = new \WPME\RepositorySettingsFactory();
+
+            $api = new \WPME\ApiFactory($repo);
+
+            if (class_exists('\Genoo\Api')) {
+                $isGenoo = true;
+            }
+        } elseif (
+            class_exists('\Genoo\Api') &&
+            class_exists('\Genoo\RepositorySettings')
+        ) {
+            $activate = true;
+
+            $repo = new \Genoo\RepositorySettings();
+
+            $api = new \Genoo\Api($repo);
+
+            $isGenoo = true;
+        } elseif (
+            class_exists('\WPMKTENGINE\Api') &&
+            class_exists('\WPMKTENGINE\RepositorySettings')
+        ) {
+            $activate = true;
+
+            $repo = new \WPMKTENGINE\RepositorySettings();
+
+            $api = new \WPMKTENGINE\Api($repo);
+        }
+
         foreach ($options['plugins'] as $plugin) {
             if ($plugin == $our_plugin) {
-                $activate = false;
-
-                $isGenoo = false;
-
-                // Get api / repo
-
-                if (
-                    class_exists('\WPME\ApiFactory') &&
-                    class_exists('\WPME\RepositorySettingsFactory')
-                ) {
-                    $activate = true;
-
-                    $repo = new \WPME\RepositorySettingsFactory();
-
-                    $api = new \WPME\ApiFactory($repo);
-
-                    if (class_exists('\Genoo\Api')) {
-                        $isGenoo = true;
-                    }
-                } elseif (
-                    class_exists('\Genoo\Api') &&
-                    class_exists('\Genoo\RepositorySettings')
-                ) {
-                    $activate = true;
-
-                    $repo = new \Genoo\RepositorySettings();
-
-                    $api = new \Genoo\Api($repo);
-
-                    $isGenoo = true;
-                } elseif (
-                    class_exists('\WPMKTENGINE\Api') &&
-                    class_exists('\WPMKTENGINE\RepositorySettings')
-                ) {
-                    $activate = true;
-
-                    $repo = new \WPMKTENGINE\RepositorySettings();
-
-                    $api = new \WPMKTENGINE\Api($repo);
-                }
-
                 // Your action if it is your plugin
 
                 $api->setStreamTypes([
@@ -6376,7 +6376,7 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
                         'description' => '',
                     ],
                     [
-                        'name' => 'Subscription Test leads options1',
+                        'name' => 'Subscription Test leads options12',
 
                         'description' => '',
                     ],
