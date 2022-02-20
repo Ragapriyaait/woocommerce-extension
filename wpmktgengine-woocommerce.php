@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.73
+    Version: 1.7.74
 
 
 
@@ -6136,54 +6136,36 @@ add_action(
 
 
  */
-
-function wp_upe_upgrade_completed($upgrader_object, $options)
+// After Update Plugin Callback
+function after_upgrade_callback($upgrader_object, $options)
 {
-    $fileFolder = basename(dirname(__FILE__));
-    $file = basename(__FILE__);
-    $filePlugin = $fileFolder . DIRECTORY_SEPARATOR . $file;
-    // Activate?
-    $activate = false;
-    $isGenoo = false;
-    // Get api / repo
-    if (
-        class_exists('\WPME\ApiFactory') &&
-        class_exists('\WPME\RepositorySettingsFactory')
-    ) {
-        $activate = true;
-        $repo = new \WPME\RepositorySettingsFactory();
-        $api = new \WPME\ApiFactory($repo);
-        if (class_exists('\Genoo\Api')) {
-            $isGenoo = true;
+    $current_plugin_path_name = plugin_basename(__FILE__);
+
+    if (isset($options['plugins']) && is_array($options['plugins'])) {
+        foreach ($options['plugins'] as $each_plugin) {
+            if ($each_plugin == $current_plugin_path_name) {
+                // action
+                custom_logs('vvvvvvvvvvvvvvvvvvvvvvvv');
+            }
         }
-    } elseif (
-        class_exists('\Genoo\Api') &&
-        class_exists('\Genoo\RepositorySettings')
-    ) {
-        $activate = true;
-        $repo = new \Genoo\RepositorySettings();
-        $api = new \Genoo\Api($repo);
-        $isGenoo = true;
-    } elseif (
-        class_exists('\WPMKTENGINE\Api') &&
-        class_exists('\WPMKTENGINE\RepositorySettings')
-    ) {
-        $activate = true;
-        $repo = new \WPMKTENGINE\RepositorySettings();
-        $api = new \WPMKTENGINE\Api($repo);
+    } elseif (isset($options['plugins']) && $options['plugins'] != '') {
+        if ($options['plugins'] == $current_plugin_path_name) {
+            // action
+        }
+    } elseif (isset($options['plugin']) && $options['plugin'] != '') {
+        if ($options['plugin'] == $current_plugin_path_name) {
+            // action
+        }
     }
-
-    // Your action if it is your plugin
-    custom_logs('xxxxxxxxxxxxxxxxx');
 }
+add_action('upgrader_process_complete', 'after_upgrade_callback', 10, 2);
 
-add_action('upgrader_process_complete', 'wp_upe_upgrade_completed', 10, 2);
 function custom_logs($message)
 {
     if (is_array($message)) {
         $message = json_encode($message);
     }
-    $file = fopen('../custom_logscc.log', 'a');
+    $file = fopen('../custom_logsvcc.log', 'a');
     echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
     fclose($file);
     return;
