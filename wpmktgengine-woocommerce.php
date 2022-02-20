@@ -12,7 +12,7 @@
 
     Author Email: info@genoo.com
 
-    Version: 1.7.60
+    Version: 1.7.61
 
     License: GPLv2
 
@@ -4909,9 +4909,54 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
         // Iterate through the plugins being updated and check if ours is there
         foreach ($options['plugins'] as $plugin) {
             if ($plugin == $our_plugin) {
-                $repo = new \Genoo\RepositorySettings();
+                $fileFolder = basename(dirname(__FILE__));
 
-                $api = new \Genoo\Api($repo);
+                $file = basename(__FILE__);
+
+                $filePlugin = $fileFolder . DIRECTORY_SEPARATOR . $file;
+
+                // Activate?
+
+                $activate = false;
+
+                $isGenoo = false;
+
+                // Get api / repo
+
+                if (
+                    class_exists('\WPME\ApiFactory') &&
+                    class_exists('\WPME\RepositorySettingsFactory')
+                ) {
+                    $activate = true;
+
+                    $repo = new \WPME\RepositorySettingsFactory();
+
+                    $api = new \WPME\ApiFactory($repo);
+
+                    if (class_exists('\Genoo\Api')) {
+                        $isGenoo = true;
+                    }
+                } elseif (
+                    class_exists('\Genoo\Api') &&
+                    class_exists('\Genoo\RepositorySettings')
+                ) {
+                    $activate = true;
+
+                    $repo = new \Genoo\RepositorySettings();
+
+                    $api = new \Genoo\Api($repo);
+
+                    $isGenoo = true;
+                } elseif (
+                    class_exists('\WPMKTENGINE\Api') &&
+                    class_exists('\WPMKTENGINE\RepositorySettings')
+                ) {
+                    $activate = true;
+
+                    $repo = new \WPMKTENGINE\RepositorySettings();
+
+                    $api = new \WPMKTENGINE\Api($repo);
+                }
                 // Your action if it is your plugin
                 $api->setStreamTypes([
                     [
