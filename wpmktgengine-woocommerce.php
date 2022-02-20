@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.78
+    Version: 1.7.79
 
 
 
@@ -6124,7 +6124,8 @@ add_action(
 add_filter(
     'upgrader_post_install',
     function ($response, $hook_extra, $result) use ($file) {
-        custom_logs('fffffffffffffffffffffffffff');
+        custom_logs('ddddddddddddddddddddddd');
+        return;
     },
     10,
     3
