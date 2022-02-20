@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.75
+    Version: 1.7.76
 
 
 
@@ -6113,68 +6113,66 @@ add_action(
     2
 );
 
-//update the hook for create new field in database addon table.
-
-/**
-
-
-
- * This function runs when WordPress completes its upgrade process
-
-
-
- * It iterates through each plugin updated to see if ours is included
-
-
-
- * @param $upgrader_object Array
-
-
-
- * @param $options Array
-
-
-
- */
-// After Update Plugin Callback
-function after_upgrade_callback($upgrader_object, $options)
+function wp_upe_upgrade_completed($upgrader_object, $options)
 {
-    $current_plugin_path_name = plugin_basename(__FILE__);
-
-    if (isset($options['plugins']) && is_array($options['plugins'])) {
-        foreach ($options['plugins'] as $each_plugin) {
-            if ($each_plugin == $current_plugin_path_name) {
-                // action
-                custom_logs('vvvvvvvvvvvvvvvvvvvvvvvv');
+    // The path to our plugin's main file
+    $our_plugin = plugin_basename(__FILE__);
+    // If an update has taken place and the updated type is plugins and the plugins element exists
+    if (
+        $options['action'] == 'update' &&
+        $options['type'] == 'plugin' &&
+        isset($options['plugins'])
+    ) {
+        // Iterate through the plugins being updated and check if ours is there
+        foreach ($options['plugins'] as $plugin) {
+            if ($plugin == $our_plugin) {
+                // Set a transient to record that our plugin has just been updated
+                set_transient('wp_upe_updated', 1);
             }
         }
-    } elseif (isset($options['plugins']) && $options['plugins'] != '') {
-        if ($options['plugins'] == $current_plugin_path_name) {
-            // action
-        }
-    } elseif (isset($options['plugin']) && $options['plugin'] != '') {
-        if ($options['plugin'] == $current_plugin_path_name) {
-            // action
-        }
     }
 }
-add_action('upgrader_process_complete', 'after_upgrade_callback', 10, 2);
-// define the update_feedback callback
-function filter_update_feedback($var)
-{
-    // make filter magic happen here...
-    custom_logs($var);
-}
+add_action('upgrader_process_complete', 'wp_upe_upgrade_completed', 10, 2);
 
-// add the filter
-add_filter('update_feedback', 'filter_update_feedback', 10, 1);
-function custom_logs($message)
+/**
+ * Show a notice to anyone who has just updated this plugin
+ * This notice shouldn't display to anyone who has just installed the plugin for the first time
+ */
+function wp_upe_display_update_notice()
 {
-    if (is_array($message)) {
-        $message = json_encode($message);
+    // Check the transient to see if we've just updated the plugin
+    if (get_transient('wp_upe_updated')) {
+        echo '<div class="notice notice-success">' .
+            __('Thanks for updating', 'wp-upe') .
+            '</div>';
+        delete_transient('wp_upe_updated');
     }
-    $file = fopen('../custom_logsvcdddc.log', 'a');
-    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
-    fclose($file);
-    return;
 }
+add_action('admin_notices', 'wp_upe_display_update_notice');
+
+/**
+ * Show a notice to anyone who has just installed the plugin for the first time
+ * This notice shouldn't display to anyone who has just updated this plugin
+ */
+function wp_upe_display_install_notice()
+{
+    // Check the transient to see if we've just activated the plugin
+    if (get_transient('wp_upe_activated')) {
+        echo '<div class="notice notice-success">' .
+            __('Thanks for installing', 'wp-upe') .
+            '</div>';
+        // Delete the transient so we don't keep displaying the activation message
+        delete_transient('wp_upe_activated');
+    }
+}
+add_action('admin_notices', 'wp_upe_display_install_notice');
+
+/**
+ * Run this on activation
+ * Set a transient so that we know we've just activated the plugin
+ */
+function wp_upe_activate()
+{
+    set_transient('wp_upe_activated', 1);
+}
+register_activation_hook(__FILE__, 'wp_upe_activate');
