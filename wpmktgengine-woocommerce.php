@@ -12,7 +12,7 @@
 
     Author Email: info@genoo.com
 
-    Version: 1.7.59
+    Version: 1.7.60
 
     License: GPLv2
 
