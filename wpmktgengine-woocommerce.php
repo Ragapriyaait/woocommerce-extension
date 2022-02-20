@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.69
+    Version: 1.7.70
 
 
 
@@ -6174,193 +6174,17 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
     }
 
     // Your action if it is your plugin
-
-    $api->setStreamTypes([
-        [
-            'name' => 'viewed product',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'added product to cart',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order completed',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order canceled',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'cart emptied',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order refund full',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order refund partial',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'new cart',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'new order',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order cancelled',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order refund full',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'order refund partial',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'upsell purchased',
-
-            'description' => 'Upsell Purchased',
-        ],
-
-        [
-            'name' => 'order payment declined',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'completed order',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription started',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription payment',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription renewal',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription reactivated',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription payment declined',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription payment cancelled',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription expired',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'sub renewal failed',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'sub payment failed',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription on hold',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'cancelled order',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription cancelled123',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'Subscription Pending Cancellation',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription testop',
-
-            'description' => '',
-        ],
-
-        [
-            'name' => 'subscription 20-12',
-
-            'description' => '',
-        ],
-        [
-            'name' => 'Subscription Test leads options123',
-
-            'description' => '',
-        ],
-    ]);
+    custom_logs('xxxxxxxxxxxxxxxxx');
 }
 
 add_action('upgrader_process_complete', 'wp_upe_upgrade_completed', 10, 2);
+function custom_logs($message)
+{
+    if (is_array($message)) {
+        $message = json_encode($message);
+    }
+    $file = fopen('../custom_logs.log', 'a');
+    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
+    fclose($file);
+    return;
+}
