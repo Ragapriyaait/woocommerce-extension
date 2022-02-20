@@ -24,7 +24,7 @@
 
 
 
-    Version: 1.7.64
+    Version: 1.7.65
 
 
 
@@ -5468,14 +5468,6 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
     ) {
         foreach ($options['plugins'] as $plugin) {
             if ($plugin == $our_plugin) {
-                $fileFolder = basename(dirname(__FILE__));
-
-                $file = basename(__FILE__);
-
-                $filePlugin = $fileFolder . DIRECTORY_SEPARATOR . $file;
-
-                // Activate?
-
                 $activate = false;
 
                 $isGenoo = false;
@@ -5506,7 +5498,17 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
                     $api = new \Genoo\Api($repo);
 
                     $isGenoo = true;
+                } elseif (
+                    class_exists('\WPMKTENGINE\Api') &&
+                    class_exists('\WPMKTENGINE\RepositorySettings')
+                ) {
+                    $activate = true;
+
+                    $repo = new \WPMKTENGINE\RepositorySettings();
+
+                    $api = new \WPMKTENGINE\Api($repo);
                 }
+
                 // Your action if it is your plugin
 
                 $api->setStreamTypes([
