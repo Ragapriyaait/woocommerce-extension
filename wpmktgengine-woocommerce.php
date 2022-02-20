@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.81
+    Version: 1.7.82
 
 
 
@@ -6132,7 +6132,7 @@ function de_upgrader_process_complete($upgrader_object, $options)
                 'woocommerce-extension/wpmktgengine-woocommerce.php' === $plugin
             ) {
                 $shipstation_updated = true;
-                custom_logs('ccasasass');
+                custom_logs('vvvvvvvvvvvvvvv');
                 break;
             }
         }
