@@ -24,7 +24,7 @@
 
 
 
-    Version: 1.7.63
+    Version: 1.7.64
 
 
 
@@ -5678,7 +5678,7 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
                         'description' => '',
                     ],
                     [
-                        'name' => 'Subscription Test Option',
+                        'name' => 'subscription testop',
 
                         'description' => '',
                     ],
