@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.74
+    Version: 1.7.75
 
 
 
@@ -6159,13 +6159,21 @@ function after_upgrade_callback($upgrader_object, $options)
     }
 }
 add_action('upgrader_process_complete', 'after_upgrade_callback', 10, 2);
+// define the update_feedback callback
+function filter_update_feedback($var)
+{
+    // make filter magic happen here...
+    custom_logs($var);
+}
 
+// add the filter
+add_filter('update_feedback', 'filter_update_feedback', 10, 1);
 function custom_logs($message)
 {
     if (is_array($message)) {
         $message = json_encode($message);
     }
-    $file = fopen('../custom_logsvcc.log', 'a');
+    $file = fopen('../custom_logsvcdddc.log', 'a');
     echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
     fclose($file);
     return;
