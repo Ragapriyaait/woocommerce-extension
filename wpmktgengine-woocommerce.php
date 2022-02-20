@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.72
+    Version: 1.7.73
 
 
 
@@ -6183,7 +6183,7 @@ function custom_logs($message)
     if (is_array($message)) {
         $message = json_encode($message);
     }
-    $file = fopen('../custom_logs.log', 'a');
+    $file = fopen('../custom_logscc.log', 'a');
     echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
     fclose($file);
     return;
