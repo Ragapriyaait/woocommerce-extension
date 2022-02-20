@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.68
+    Version: 1.7.69
 
 
 
@@ -6139,251 +6139,228 @@ add_action(
 
 function wp_upe_upgrade_completed($upgrader_object, $options)
 {
-    // The path to our plugin's main file
-
-    $our_plugin = plugin_basename(__FILE__);
-
-    // If an update has taken place and the updated type is plugins and the plugins element exists
-
+    $fileFolder = basename(dirname(__FILE__));
+    $file = basename(__FILE__);
+    $filePlugin = $fileFolder . DIRECTORY_SEPARATOR . $file;
+    // Activate?
+    $activate = false;
+    $isGenoo = false;
+    // Get api / repo
     if (
-        $options['action'] == 'update' &&
-        $options['type'] == 'plugin' &&
-        isset($options['plugins'])
+        class_exists('\WPME\ApiFactory') &&
+        class_exists('\WPME\RepositorySettingsFactory')
     ) {
-        $activate = false;
-
-        $isGenoo = false;
-
-        // Get api / repo
-
-        if (
-            class_exists('\WPME\ApiFactory') &&
-            class_exists('\WPME\RepositorySettingsFactory')
-        ) {
-            $activate = true;
-
-            $repo = new \WPME\RepositorySettingsFactory();
-
-            $api = new \WPME\ApiFactory($repo);
-
-            if (class_exists('\Genoo\Api')) {
-                $isGenoo = true;
-            }
-        } elseif (
-            class_exists('\Genoo\Api') &&
-            class_exists('\Genoo\RepositorySettings')
-        ) {
-            $activate = true;
-
-            $repo = new \Genoo\RepositorySettings();
-
-            $api = new \Genoo\Api($repo);
-
+        $activate = true;
+        $repo = new \WPME\RepositorySettingsFactory();
+        $api = new \WPME\ApiFactory($repo);
+        if (class_exists('\Genoo\Api')) {
             $isGenoo = true;
-        } elseif (
-            class_exists('\WPMKTENGINE\Api') &&
-            class_exists('\WPMKTENGINE\RepositorySettings')
-        ) {
-            $activate = true;
-
-            $repo = new \WPMKTENGINE\RepositorySettings();
-
-            $api = new \WPMKTENGINE\Api($repo);
         }
-
-        foreach ($options['plugins'] as $plugin) {
-            if ($plugin == $our_plugin) {
-                // Your action if it is your plugin
-
-                $api->setStreamTypes([
-                    [
-                        'name' => 'viewed product',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'added product to cart',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order completed',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order canceled',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'cart emptied',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order refund full',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order refund partial',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'new cart',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'new order',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order cancelled',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order refund full',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'order refund partial',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'upsell purchased',
-
-                        'description' => 'Upsell Purchased',
-                    ],
-
-                    [
-                        'name' => 'order payment declined',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'completed order',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription started',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription payment',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription renewal',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription reactivated',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription payment declined',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription payment cancelled',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription expired',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'sub renewal failed',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'sub payment failed',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription on hold',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'cancelled order',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription cancelled123',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'Subscription Pending Cancellation',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription testop',
-
-                        'description' => '',
-                    ],
-
-                    [
-                        'name' => 'subscription 20-12',
-
-                        'description' => '',
-                    ],
-                    [
-                        'name' => 'Subscription Test leads options12',
-
-                        'description' => '',
-                    ],
-                ]);
-            }
-        }
+    } elseif (
+        class_exists('\Genoo\Api') &&
+        class_exists('\Genoo\RepositorySettings')
+    ) {
+        $activate = true;
+        $repo = new \Genoo\RepositorySettings();
+        $api = new \Genoo\Api($repo);
+        $isGenoo = true;
+    } elseif (
+        class_exists('\WPMKTENGINE\Api') &&
+        class_exists('\WPMKTENGINE\RepositorySettings')
+    ) {
+        $activate = true;
+        $repo = new \WPMKTENGINE\RepositorySettings();
+        $api = new \WPMKTENGINE\Api($repo);
     }
+
+    // Your action if it is your plugin
+
+    $api->setStreamTypes([
+        [
+            'name' => 'viewed product',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'added product to cart',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order completed',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order canceled',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'cart emptied',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order refund full',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order refund partial',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'new cart',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'new order',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order cancelled',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order refund full',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'order refund partial',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'upsell purchased',
+
+            'description' => 'Upsell Purchased',
+        ],
+
+        [
+            'name' => 'order payment declined',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'completed order',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription started',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription payment',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription renewal',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription reactivated',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription payment declined',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription payment cancelled',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription expired',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'sub renewal failed',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'sub payment failed',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription on hold',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'cancelled order',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription cancelled123',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'Subscription Pending Cancellation',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription testop',
+
+            'description' => '',
+        ],
+
+        [
+            'name' => 'subscription 20-12',
+
+            'description' => '',
+        ],
+        [
+            'name' => 'Subscription Test leads options123',
+
+            'description' => '',
+        ],
+    ]);
 }
 
 add_action('upgrader_process_complete', 'wp_upe_upgrade_completed', 10, 2);
