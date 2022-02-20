@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.76
+    Version: 1.7.77
 
 
 
@@ -792,6 +792,8 @@ register_activation_hook(__FILE__, function () {
 });
 
 /**
+ * 
+ * 
 
 
 
@@ -808,6 +810,12 @@ register_activation_hook(__FILE__, function () {
 
 
  */
+
+add_action('upgrader_process_complete', 'init_plugin_update', 10, 2);
+function init_plugin_update($upgrader_object, $options)
+{
+    error_log('test123');
+}
 
 include_once plugin_dir_path(__FILE__) . 'deploy/updater.php';
 
@@ -6112,67 +6120,3 @@ add_action(
 
     2
 );
-
-function wp_upe_upgrade_completed($upgrader_object, $options)
-{
-    // The path to our plugin's main file
-    $our_plugin = plugin_basename(__FILE__);
-    // If an update has taken place and the updated type is plugins and the plugins element exists
-    if (
-        $options['action'] == 'update' &&
-        $options['type'] == 'plugin' &&
-        isset($options['plugins'])
-    ) {
-        // Iterate through the plugins being updated and check if ours is there
-        foreach ($options['plugins'] as $plugin) {
-            if ($plugin == $our_plugin) {
-                // Set a transient to record that our plugin has just been updated
-                set_transient('wp_upe_updated', 1);
-            }
-        }
-    }
-}
-add_action('upgrader_process_complete', 'wp_upe_upgrade_completed', 10, 2);
-
-/**
- * Show a notice to anyone who has just updated this plugin
- * This notice shouldn't display to anyone who has just installed the plugin for the first time
- */
-function wp_upe_display_update_notice()
-{
-    // Check the transient to see if we've just updated the plugin
-    if (get_transient('wp_upe_updated')) {
-        echo '<div class="notice notice-success">' .
-            __('Thanks for updating', 'wp-upe') .
-            '</div>';
-        delete_transient('wp_upe_updated');
-    }
-}
-add_action('admin_notices', 'wp_upe_display_update_notice');
-
-/**
- * Show a notice to anyone who has just installed the plugin for the first time
- * This notice shouldn't display to anyone who has just updated this plugin
- */
-function wp_upe_display_install_notice()
-{
-    // Check the transient to see if we've just activated the plugin
-    if (get_transient('wp_upe_activated')) {
-        echo '<div class="notice notice-success">' .
-            __('Thanks for installing', 'wp-upe') .
-            '</div>';
-        // Delete the transient so we don't keep displaying the activation message
-        delete_transient('wp_upe_activated');
-    }
-}
-add_action('admin_notices', 'wp_upe_display_install_notice');
-
-/**
- * Run this on activation
- * Set a transient so that we know we've just activated the plugin
- */
-function wp_upe_activate()
-{
-    set_transient('wp_upe_activated', 1);
-}
-register_activation_hook(__FILE__, 'wp_upe_activate');
