@@ -24,7 +24,7 @@
 
 
 
-    Version: 1.7.62
+    Version: 1.7.63
 
 
 
@@ -5674,6 +5674,11 @@ function wp_upe_upgrade_completed($upgrader_object, $options)
 
                     [
                         'name' => 'Subscription Pending Cancellation',
+
+                        'description' => '',
+                    ],
+                    [
+                        'name' => 'Subscription Test Option',
 
                         'description' => '',
                     ],
