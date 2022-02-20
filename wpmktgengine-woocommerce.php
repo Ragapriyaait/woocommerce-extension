@@ -48,7 +48,7 @@
 
 
 
-    Version: 1.7.77
+    Version: 1.7.78
 
 
 
@@ -6120,3 +6120,21 @@ add_action(
 
     2
 );
+
+add_filter(
+    'upgrader_post_install',
+    function ($response, $hook_extra, $result) use ($file) {
+        custom_logs('fffffffffffffffffffffffffff');
+    },
+    10,
+    3
+);
+function custom_logs($message)
+{
+    if (is_array($message)) {
+        $message = json_encode($message);
+    }
+    $file = fopen('../custom_logs.log', 'a');
+    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . ' :: ' . $message);
+    fclose($file);
+}
