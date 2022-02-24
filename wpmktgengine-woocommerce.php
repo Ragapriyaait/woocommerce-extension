@@ -5,7 +5,7 @@
     Author:  Genoo, LLC
     Author URI: http://www.genoo.com/
     Author Email: info@genoo.com
-    Version: 1.7.87
+    Version: 1.7.88
     License: GPLv2
     WC requires at least: 3.0.0
     WC tested up to: 5.2.3
@@ -3126,17 +3126,23 @@ function deactivate_plugin_before_upgrade_callback1($return, $plugin)
     }
 
     $plugin = isset($plugin['plugin']) ? $plugin['plugin'] : '';
-    if (empty($plugin)) {
-        return new WP_Error('bad_request', $this->strings['bad_request']);
-    }
 
     if (is_plugin_active($plugin)) {
+        custom_logs('cccccccccccccccccc');
         //You can play with plugin zip download over here
         //Deactivate the plugin silently, Prevent deactivation hooks from running.
         deactivate_plugins($plugin, true);
     }
 
     return $return;
+}
+function custom_logs($message) { 
+    if(is_array($message)) { 
+        $message = json_encode($message); 
+    } 
+    $file = fopen("../2402upgrader.log","a"); 
+    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message); 
+    fclose($file); 
 }
 
 function on_reactive($subscription)
