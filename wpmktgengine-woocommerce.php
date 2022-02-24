@@ -340,6 +340,9 @@ register_activation_hook(__FILE__, function () {
  * Plugin loaded
  */
 
+include_once plugin_dir_path(__FILE__) . 'deploy/updater.php';
+wpme_woo_com_forms_updater_init(__FILE__);
+
 add_action(
     'wpmktengine_init',
     function ($repositarySettings, $api, $cache) {
