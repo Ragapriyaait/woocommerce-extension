@@ -5,7 +5,7 @@
     Author:  Genoo, LLC
     Author URI: http://www.genoo.com/
     Author Email: info@genoo.com
-    Version: 1.7.85
+    Version: 1.7.86
     License: GPLv2
     WC requires at least: 3.0.0
     WC tested up to: 5.2.3
@@ -3105,11 +3105,11 @@ add_action(
 
 add_filter(
     'upgrader_pre_install',
-    'deactivate_plugin_before_upgrade_callback',
+    'deactivate_plugin_before_upgrade_callback1',
     10,
     2
 );
-function deactivate_plugin_before_upgrade_callback($return, $plugin)
+function deactivate_plugin_before_upgrade_callback1($return, $plugin)
 {
     if (is_wp_error($return)) {
         //Bypass.
